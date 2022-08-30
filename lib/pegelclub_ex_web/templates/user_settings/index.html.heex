@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Gast</th>
+  </tr>
+  <%= for user <- @users do %>
+    <tr>
+      <td><%= user.email %></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+
