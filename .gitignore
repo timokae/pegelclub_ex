@@ -32,3 +32,6 @@ pegelclub_ex-*.tar
 npm-debug.log
 /assets/node_modules/
 
+deploy
+
+priv/static
