@@ -1,0 +1,73 @@
+<h1>Show Score</h1>
+
+<ul>
+
+  <li>
+    <strong>Penalty pudel:</strong>
+    <%= @score.penalty_pudel %>
+  </li>
+
+  <li>
+    <strong>Penalty 25:</strong>
+    <%= @score.penalty_25 %>
+  </li>
+
+  <li>
+    <strong>Penalty 50:</strong>
+    <%= @score.penalty_50 %>
+  </li>
+
+  <li>
+    <strong>Penalty 75:</strong>
+    <%= @score.penalty_75 %>
+  </li>
+
+  <li>
+    <strong>Penalty 100:</strong>
+    <%= @score.penalty_100 %>
+  </li>
+
+  <li>
+    <strong>Penalty 125:</strong>
+    <%= @score.penalty_125 %>
+  </li>
+
+  <li>
+    <strong>Penalty 150:</strong>
+    <%= @score.penalty_150 %>
+  </li>
+
+  <li>
+    <strong>Penalty 175:</strong>
+    <%= @score.penalty_175 %>
+  </li>
+
+  <li>
+    <strong>Penalty 500:</strong>
+    <%= @score.penalty_500 %>
+  </li>
+
+  <li>
+    <strong>Delay:</strong>
+    <%= @score.delay %>
+  </li>
+
+  <li>
+    <strong>Early leave:</strong>
+    <%= @score.early_leave %>
+  </li>
+
+  <li>
+    <strong>Other:</strong>
+    <%= @score.other %>
+  </li>
+
+  <li>
+    <strong>Is present:</strong>
+    <%= @score.is_present %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.score_path(@conn, :edit, @score) %></span> |
+<span><%= link "Back", to: Routes.score_path(@conn, :index) %></span>

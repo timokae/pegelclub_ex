@@ -1,0 +1,19 @@
+<h1 class="is-size-3">Existierenden Spieler hinzufügen</h1>
+
+<.form let={f} for={@changeset} action={Routes.match_score_path(@conn, :create, @match)}>
+
+  <%= hidden_input f, :match_id %>
+
+  <div class="is-flex mt-3">
+    <div class="select">
+      <%= select f, :player_id, guest_select_options(@guests), disabled: Enum.empty?(@guests) %>
+    </div>
+
+    <%= submit "Gast hinzufügen", class: "button is-primary ml-3", disabled: Enum.empty?(@guests) %>
+  </div>
+
+</.form>
+
+<hr class="my-5"/>
+
+<span><%= link "Back", to: Routes.match_path(@conn, :show, @match) %></span>

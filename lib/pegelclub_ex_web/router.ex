@@ -18,11 +18,16 @@ defmodule PegelclubExWeb.Router do
   end
 
   scope "/", PegelclubExWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_user]
 
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+    resources "/players", PlayerController, only: [:new, :create, :index]
+
+    resources "/matches", MatchController, only: [:index, :show, :new, :create] do
+      resources "/scores", ScoreController, only: [:new, :create, :edit, :update, :delete]
+    end
   end
 
   # Other scopes may use custom stacks.

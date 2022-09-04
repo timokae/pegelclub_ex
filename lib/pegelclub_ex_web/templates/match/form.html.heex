@@ -1,0 +1,19 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="field mt-5">
+    <%= label f, "Datum", class: "label" %>
+    <div class="control">
+      <%= date_input f, :played_at, class: "input" %>
+    </div>
+    <%= error_tag f, :played_at %>
+  </div>
+
+  <div>
+    <%= submit "Save", class: "button is-primary" %>
+  </div>
+</.form>

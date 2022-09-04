@@ -1,0 +1,33 @@
+.is-full-width {
+  width: 100%;
+}
+
+.has-gap {
+  &-1 { gap: $size-7; }
+  &-2 { gap: $size-6; }
+  &-3 { gap: $size-5; }
+  &-4 { gap: $size-4; }
+  &-5 { gap: $size-3; }
+  &-6 { gap: $size-2; }
+  &-7 { gap: $size-1; }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  input {
+    margin-right: 0.5rem;
+  }
+}
+
+.table {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+.button {
+  border-radius: 1rem;
+  min-width: 6rem;
+}

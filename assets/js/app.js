@@ -1,6 +1,6 @@
 // We import the CSS which is extracted to its own file by esbuild.
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
-import "../css/app.css"
+// import "../css/app.css"
 
 // If you want to use Phoenix channels, run `mix help phx.gen.channel`
 // to get started and then uncomment the line below.
@@ -42,4 +42,46 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach( el => {
+    el.addEventListener('click', () => {
+
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle('is-active');
+      $target.classList.toggle('is-active');
+
+    });
+  });
+
+
+  const checkbox = document.querySelector('#toggle-hidable-cols');
+  if (checkbox) {
+    document.querySelectorAll('.hideable-table-col').forEach((el) => {
+      if (checkbox.checked) {
+        el.classList.remove('is-hidden');
+      } else {
+        el.classList.add('is-hidden');
+      }
+    });
+
+    checkbox.addEventListener('change', (event) => {
+      document.querySelectorAll('.hideable-table-col').forEach((el) => {
+        if (event.target.checked) {
+          el.classList.remove('is-hidden');
+        } else {
+          el.classList.add('is-hidden');
+        }
+      });
+    });
+  }
+});
 

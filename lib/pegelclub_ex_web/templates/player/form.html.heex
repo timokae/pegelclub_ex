@@ -1,0 +1,27 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="field mt-5">
+    <%= label f, :name, class: "label" %>
+    <div class="control">
+      <%= text_input f, :name, class: "input" %>
+    </div>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="field mt-5">
+    <%= label f, :guest, class: "Gast" do %>
+      <%= checkbox f, :guest %>
+      Spieler ist Gast
+    <% end %>
+  </div>
+
+  <div>
+    <%= link "Back", to: @cancel_link, class: "button" %>
+    <%= submit "Save", class: "button is-primary" %>
+  </div>
+</.form>

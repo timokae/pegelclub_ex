@@ -1,0 +1,63 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :penalty_pudel %>
+  <%= number_input f, :penalty_pudel %>
+  <%= error_tag f, :penalty_pudel %>
+
+  <%= label f, :penalty_25 %>
+  <%= number_input f, :penalty_25 %>
+  <%= error_tag f, :penalty_25 %>
+
+  <%= label f, :penalty_50 %>
+  <%= number_input f, :penalty_50 %>
+  <%= error_tag f, :penalty_50 %>
+
+  <%= label f, :penalty_75 %>
+  <%= number_input f, :penalty_75 %>
+  <%= error_tag f, :penalty_75 %>
+
+  <%= label f, :penalty_100 %>
+  <%= number_input f, :penalty_100 %>
+  <%= error_tag f, :penalty_100 %>
+
+  <%= label f, :penalty_125 %>
+  <%= number_input f, :penalty_125 %>
+  <%= error_tag f, :penalty_125 %>
+
+  <%= label f, :penalty_150 %>
+  <%= number_input f, :penalty_150 %>
+  <%= error_tag f, :penalty_150 %>
+
+  <%= label f, :penalty_175 %>
+  <%= number_input f, :penalty_175 %>
+  <%= error_tag f, :penalty_175 %>
+
+  <%= label f, :penalty_500 %>
+  <%= number_input f, :penalty_500 %>
+  <%= error_tag f, :penalty_500 %>
+
+  <%= label f, :delay %>
+  <%= number_input f, :delay %>
+  <%= error_tag f, :delay %>
+
+  <%= label f, :early_leave %>
+  <%= number_input f, :early_leave %>
+  <%= error_tag f, :early_leave %>
+
+  <%= label f, :other %>
+  <%= number_input f, :other %>
+  <%= error_tag f, :other %>
+
+  <%= label f, :is_present %>
+  <%= checkbox f, :is_present %>
+  <%= error_tag f, :is_present %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+</.form>

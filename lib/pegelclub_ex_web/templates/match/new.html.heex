@@ -1,0 +1,4 @@
+<h1 class="is-size-3">Neues Spiel</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.match_path(@conn, :create)) %>
+

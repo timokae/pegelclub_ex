@@ -1,5 +1,14 @@
 /* This file is for your main application CSS */
-@import "./phoenix.css";
+// @import "./phoenix.css";
+
+@import "./variables.scss";
+
+@import "bulma";
+
+@import "./customization.scss";
+@import "./switch.scss";
+
+
 
 /* Alerts and form errors used by phx.new */
 .alert {
@@ -30,9 +39,10 @@
   display: none;
 }
 .invalid-feedback {
-  color: #a94442;
-  display: block;
-  margin: -1rem 0 2rem;
+  @extend .help;
+  @extend .is-danger;
+
+  font-size: 0.75rem;
 }
 
 /* LiveView specific classes for your customization */
@@ -118,3 +128,21 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.table-wrapper {
+  table {
+    min-width: 100%;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+}
+
+

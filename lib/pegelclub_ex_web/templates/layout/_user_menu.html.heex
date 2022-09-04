@@ -1,10 +1,12 @@
-<ul>
 <%= if @current_user do %>
-  <li><%= @current_user.email %></li>
-  <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
-  <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+  Eingeloggt als <span class="has-text-weight-semibold"><%= @current_user.email %></span>
+  <div class="buttons mt-3">
+    <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "button" %>
+    <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "button" %>
+  </div>
 <% else %>
-  <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
-  <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+  <div class="buttons">
+    <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "button" %>
+    <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "button" %>
+  </div>
 <% end %>
-</ul>

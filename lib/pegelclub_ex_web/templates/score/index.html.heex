@@ -1,0 +1,50 @@
+<h1>Listing Scores</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Penalty pudel</th>
+      <th>Penalty 25</th>
+      <th>Penalty 50</th>
+      <th>Penalty 75</th>
+      <th>Penalty 100</th>
+      <th>Penalty 125</th>
+      <th>Penalty 150</th>
+      <th>Penalty 175</th>
+      <th>Penalty 500</th>
+      <th>Delay</th>
+      <th>Early leave</th>
+      <th>Other</th>
+      <th>Is present</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for score <- @scores do %>
+    <tr>
+      <td><%= score.penalty_pudel %></td>
+      <td><%= score.penalty_25 %></td>
+      <td><%= score.penalty_50 %></td>
+      <td><%= score.penalty_75 %></td>
+      <td><%= score.penalty_100 %></td>
+      <td><%= score.penalty_125 %></td>
+      <td><%= score.penalty_150 %></td>
+      <td><%= score.penalty_175 %></td>
+      <td><%= score.penalty_500 %></td>
+      <td><%= score.delay %></td>
+      <td><%= score.early_leave %></td>
+      <td><%= score.other %></td>
+      <td><%= score.is_present %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.score_path(@conn, :show, score) %></span>
+        <span><%= link "Edit", to: Routes.score_path(@conn, :edit, score) %></span>
+        <span><%= link "Delete", to: Routes.score_path(@conn, :delete, score), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Score", to: Routes.score_path(@conn, :new) %></span>

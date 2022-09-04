@@ -5,27 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
+
     <%= live_title_tag assigns[:page_title] || "PegelclubEx", suffix: " · Phoenix Framework" %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
   <body>
     <header>
       <section class="container">
-        <nav>
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-          <%= render "_user_menu.html", assigns %>
+        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+              <img src={Routes.static_path(@conn, "/images/logo.png")} alt="Phoenix Framework Logo"/>
+              <div class="ml-2">
+                <p class="is-size-4 hast-text-weight-bold">Pegel<span class="is-size-5 has-text-weight-light">club</span></p>
+
+              </div>
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+
+          <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+              <%= if @current_user do %>
+              <% end %>
+
+
+              <%= link "Spieler", to: Routes.player_path(@conn, :index), class: "navbar-item" %>
+              <%= link "Spielstände", to: Routes.match_path(@conn, :index), class: "navbar-item" %>
+
+            </div>
+
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <%= render "_user_menu.html", assigns %>
+              </div>
+            </div>
+          </div>
         </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
-        </a>
       </section>
     </header>
-    <%= @inner_content %>
+    <section class="container is-fullhd px-4 py-5">
+      <%= @inner_content %>
+    </section>
   </body>
 </html>

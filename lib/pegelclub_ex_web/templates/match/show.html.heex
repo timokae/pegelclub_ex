@@ -1,0 +1,93 @@
+<h1 class="is-size-3">Match vom <%= @match.played_at %></h1>
+
+<section class="level is-mobile mt-6">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Gesamt</p>
+      <p class="title"><%= currency_format Map.get(@match_stats, :total) %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Durchschnitt</p>
+      <p class="title"><%= currency_format Map.get(@match_stats, :average) %></p>
+    </div>
+  </div>
+</section>
+<section class="level is-mobile">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Mitspieler</p>
+      <p class="title"><%= Enum.count(@scores) %></p>
+    </div>
+  </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">Abwesend</p>
+      <p class="title"><%= Enum.count(@scores, fn s -> !s.is_present end) %></p>
+    </div>
+  </div>
+</section>
+
+<div class="is-flex is-justify-content-center has-gap-2">
+  <%= link "Gast hinzufügen", to: Routes.match_score_path(@conn, :new, @match), class: "button is-rounded" %>
+
+  <label class="checkbox">
+    <input type="checkbox" id="toggle-hidable-cols" checked>
+    Strafen anzeigen
+  </label>
+</div>
+
+<div class="table-container mt-6">
+  <table class="table is-striped mx-auto">
+    <tr>
+      <th>Gast</th>
+      <th>Spieler</th>
+      <th class="has-text-centered hideable-table-col">Pudel</th>
+      <th class="has-text-centered hideable-table-col">0.25 €</th>
+      <th class="has-text-centered hideable-table-col">0.50 €</th>
+      <th class="has-text-centered hideable-table-col">0.75 €</th>
+      <th class="has-text-centered hideable-table-col">1.00 €</th>
+      <th class="has-text-centered hideable-table-col">1.25 €</th>
+      <th class="has-text-centered hideable-table-col">1.50 €</th>
+      <th class="has-text-centered hideable-table-col">1.75 €</th>
+      <th class="has-text-centered hideable-table-col">5.00 €</th>
+      <th class="has-text-centered hideable-table-col">Verspätung</th>
+      <th class="has-text-centered hideable-table-col">Früher gehen</th>
+      <th class="has-text-centered hideable-table-col">Sonstiges</th>
+      <th class="has-text-centered hideable-table-col">Summe Strafen</th>
+      <th class="has-text-centered">inkl. Gebühren</th>
+    </tr>
+    <%= for score <- @scores do %>
+      <tr>
+        <td class="has-text-centered"><%= player_symbol(score) %></td>
+        <td>
+          <%= link score.player.name, to: Routes.match_score_path(@conn, :edit, @match, score) %>
+          <%= pudel_king_symbol(score, Map.get(@match_stats, :pudel_king_value)) %>
+        </td>
+        <td class="has-text-right hideable-table-col">
+          <%= score.penalty_pudel %>
+        </td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_25 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_50 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_75 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_100 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_125 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_150 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_175 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.penalty_500 %></td>
+        <td class="has-text-right hideable-table-col"><%= score.delay %></td>
+        <td class="has-text-right hideable-table-col"><%= score.early_leave %></td>
+        <td class="has-text-right hideable-table-col"><%= score.other %></td>
+        <td class="has-text-right hideable-table-col"><%= currency_format PegelclubEx.Game.Scores.penalty_sum(score) %></td>
+        <td class="has-text-right">
+          <%= if @match_stats[:score_totals][score.id] do %>
+            <%= currency_format @match_stats[:score_totals][score.id] %>
+          <% else %>
+            <%= currency_format Map.get(@match_stats, :average) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

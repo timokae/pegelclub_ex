@@ -1,0 +1,21 @@
+<h1 class="is-size-3">Spielstand bearbeiten</h1>
+
+<%= render "penalty_form.html", Map.merge(
+  assigns,
+  %{
+    action: Routes.match_score_path(@conn, :update, @score.match_id, @score),
+    cancel_link: Routes.match_path(@conn, :show, @score.match_id)
+  }
+) %>
+
+
+<%= if @score.player.guest do %>
+  <hr/>
+
+  <%= link "Spieler entfernen",
+    to: Routes.match_score_path(@conn, :delete, @score.match_id, @score),
+    method: :delete,
+    data: [confirm: "Spieler wirklich entfernen?"],
+    class: "button is-danger"
+  %>
+<% end %>
