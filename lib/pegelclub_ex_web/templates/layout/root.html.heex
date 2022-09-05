@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="csrf-token" content={csrf_token_value()}>
 
-    <%= live_title_tag assigns[:page_title] || "PegelclubEx", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "Pegelclub", suffix: "" %>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
@@ -47,9 +49,7 @@
             </div>
 
             <div class="navbar-end">
-              <div class="navbar-item">
-                <%= render "_user_menu.html", assigns %>
-              </div>
+              <%= render "_user_menu.html", assigns %>
             </div>
           </div>
         </nav>

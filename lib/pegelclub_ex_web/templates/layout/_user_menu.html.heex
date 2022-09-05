@@ -1,11 +1,7 @@
+<hr/>
 <%= if @current_user do %>
-  Eingeloggt als <span class="has-text-weight-semibold"><%= @current_user.email %></span>
-  <div class="buttons mt-3">
-    <%= link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "button" %>
-    <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "button" %>
-  </div>
+    <%= link "Account", to: Routes.user_settings_path(@conn, :edit), class: "navbar-item" %>
+    <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "navbar-item" %>
 <% else %>
-  <div class="buttons">
-    <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "button" %>
-  </div>
+    <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "navbar-item" %>
 <% end %>

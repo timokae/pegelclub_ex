@@ -5,98 +5,160 @@
     </div>
   <% end %>
 
-  <div class="field mt-5 mt-5">
-    <%= label f, "Pudel", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_pudel, class: "input" %>
+  <div class="penalty-wrapper">
+    <div class="field mt-5 mt-5">
+      <%= label f, "Pudel", class: "label" %>
+      <div class="control is-flex">
+        <%= number_input f, :penalty_pudel, class: "input mr-5", min: 0 %>
+
+        <div class="is-flex has-gap-5">
+          <%= penalty_decrease_button(:penalty_pudel) %>
+          <%= penalty_increase_button(:penalty_pudel) %>
+        </div>
+      </div>
+      <%= error_tag f, :penalty_pudel %>
     </div>
-    <%= error_tag f, :penalty_pudel %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "0.25 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_25, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_25, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_25) %>
+        <%= penalty_increase_button(:penalty_25) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_25 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "0.50 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_50, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_50, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_50) %>
+        <%= penalty_increase_button(:penalty_50) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_50 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "0.75 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_75, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_75, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_75) %>
+        <%= penalty_increase_button(:penalty_75) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_75 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "1.00 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_100, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_100, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_100) %>
+        <%= penalty_increase_button(:penalty_100) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_100 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "1.25 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_125, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_125, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_125) %>
+        <%= penalty_increase_button(:penalty_125) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_125 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "1.50 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_150, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_150, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_150) %>
+        <%= penalty_increase_button(:penalty_150) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_150 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "1.75 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_175, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_175, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_175) %>
+        <%= penalty_increase_button(:penalty_175) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_175 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "5.00 €", class: "label" %>
-    <div class="control">
-      <%= number_input f, :penalty_500, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :penalty_500, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:penalty_500) %>
+        <%= penalty_increase_button(:penalty_500) %>
+      </div>
     </div>
     <%= error_tag f, :penalty_500 %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "Verspätung (in Minuten)", class: "label" %>
-    <div class="control">
-      <%= number_input f, :delay, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :delay, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:delay) %>
+        <%= penalty_increase_button(:delay) %>
+      </div>
     </div>
     <%= error_tag f, :delay %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "Früher gehen (in Minuten)", class: "label" %>
-    <div class="control">
-      <%= number_input f, :early_leave, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :early_leave, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:early_leave) %>
+        <%= penalty_increase_button(:early_leave) %>
+      </div>
     </div>
     <%= error_tag f, :early_leave %>
   </div>
 
   <div class="field mt-5">
     <%= label f, "Sonstiges (in Euro)", class: "label" %>
-    <div class="control">
-      <%= number_input f, :other, class: "input" %>
+    <div class="control is-flex">
+      <%= number_input f, :other, class: "input mr-5", min: 0 %>
+
+      <div class="is-flex has-gap-5">
+        <%= penalty_decrease_button(:other) %>
+        <%= penalty_increase_button(:other) %>
+      </div>
     </div>
     <%= error_tag f, :other %>
   </div>
@@ -108,7 +170,7 @@
     <% end %>
   </div>
 
-  <div class="is-flex has-gap-2">
+  <div class="is-flex has-gap-6">
     <%= link "Back", to: @cancel_link, class: "button" %>
     <%= submit "Save", class: "button is-primary" %>
   </div>

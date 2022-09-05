@@ -28,6 +28,12 @@
 }
 
 .button {
+  touch-action: manipulation;
+
   border-radius: 1rem;
   min-width: 6rem;
+
+  &.has-no-min-width {
+    min-width: unset;
+  }
 }

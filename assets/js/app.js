@@ -44,6 +44,12 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 document.addEventListener('DOMContentLoaded', () => {
+  initializeNavbar();
+  initializeHideableCols();
+  initializePenaltyButtons();
+});
+
+function initializeNavbar() {
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
@@ -61,8 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
   });
+}
 
-
+function initializeHideableCols() {
   const checkbox = document.querySelector('#toggle-hidable-cols');
   if (checkbox) {
     document.querySelectorAll('.hideable-table-col').forEach((el) => {
@@ -83,5 +90,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+}
 
+function initializePenaltyButtons() {
+  const increaseValue = function(el, step) {
+    const targetValue = parseInt(el.value);
+    const maxAttribute = el.getAttribute('max');
+
+    if (maxAttribute && targetValue + step > parseInt(maxAttribute)) {
+      return;
+    }
+
+    el.value = parseInt(el.value) + step;
+  }
+
+  const decreaseValue = function(el, step) {
+    const targetValue = parseInt(el.value);
+    const minAttribute = el.getAttribute('min');
+
+
+    if (minAttribute && targetValue + step < parseInt(minAttribute)) {
+      return;
+    }
+
+    el.value = parseInt(el.value) + step;
+  }
+
+  document.querySelectorAll("[data-penalty-target]").forEach(el => {
+    el.addEventListener('click', (e) => {
+      const target = document.getElementById(e.currentTarget.dataset.penaltyTarget);
+      const directionAttribute = e.currentTarget.dataset.penaltyDirectionValue;
+
+      if (!(directionAttribute && target)) { return; }
+
+      const direction = parseInt(directionAttribute);
+      const minAttribute = target.getAttribute('min');
+      const step = target.getAttribute('step') ? parseInt(target.getAttribute('step')) : 1
+
+      if (direction > 0) {
+        increaseValue(target, step);
+      } else {
+        decreaseValue(target, step * -1);
+      }
+    })
+  });
+}
