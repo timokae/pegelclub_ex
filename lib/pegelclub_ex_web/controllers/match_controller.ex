@@ -22,7 +22,7 @@ defmodule PegelclubExWeb.MatchController do
       {:ok, match} ->
         conn
         |> put_flash(:info, "Match created successfully.")
-        |> redirect(to: Routes.match_path(conn, :show, match))
+        |> redirect(to: Routes.live_path(conn, PegelclubExWeb.MatchLive, match.id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -38,5 +38,14 @@ defmodule PegelclubExWeb.MatchController do
       scores: Game.match_scores_sorted_by_name(match),
       match_stats: Game.match_stats(match)
     )
+  end
+
+  def delete(conn, %{"id" => id}) do
+    match = Game.get_match!(id)
+    {:ok, _match} = Game.delete_match(match)
+
+    conn
+    |> put_flash(:info, "Spielstand erfolgreich gelöscht!")
+    |> redirect(to: Routes.match_path(conn, :index))
   end
 end

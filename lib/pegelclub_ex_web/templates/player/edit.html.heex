@@ -1,0 +1,9 @@
+<h1 class="title"><%= @changeset.data.name %></h1>
+
+<%= render "form.html", Map.merge(
+  assigns,
+  %{
+    action: Routes.player_path(@conn, :update, @changeset.data.id),
+    cancel_link: Routes.player_path(@conn, :index)
+  }
+) %>

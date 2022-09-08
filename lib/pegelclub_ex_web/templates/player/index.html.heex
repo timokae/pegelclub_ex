@@ -1,4 +1,4 @@
-<h1 class="is-size-3">Spieler</h1>
+<h1 class="title">Spieler</h1>
 
 <%= link "Spieler anlegen", to: Routes.player_path(@conn, :new), class: "button is-rounded mt-5" %>
 
@@ -12,7 +12,7 @@
   <tbody>
 <%= for player <- @players do %>
     <tr>
-      <td><%= player.name %></td>
+      <td><%= link player.name, to: Routes.player_path(@conn, :edit, player) %></td>
       <td><%= player_type(player) %></td>
 
 

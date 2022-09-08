@@ -42,7 +42,7 @@
               <%= if @current_user do %>
               <% end %>
 
-
+              <%= link "Regeln", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
               <%= link "Spieler", to: Routes.player_path(@conn, :index), class: "navbar-item" %>
               <%= link "Spielstände", to: Routes.match_path(@conn, :index), class: "navbar-item" %>
 

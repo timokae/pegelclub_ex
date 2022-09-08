@@ -27,4 +27,12 @@ defmodule PegelclubExWeb.ScoreView do
       end
     end
   end
+
+  def title(name) do
+    if String.ends_with?(name, "s") do
+      name
+    else
+      name <> "s"
+    end
+  end
 end

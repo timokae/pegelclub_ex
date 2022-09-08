@@ -28,6 +28,11 @@ defmodule PegelclubEx.Game do
     Score.penalty_changeset(score, attrs)
   end
 
+  def subscribe_to_scores, do: Scores.subscribe()
+
+  def penalty_sum(%Score{} = score), do: Scores.penalty_sum(score)
+  def penalty_sum(%Score{} = score, pudel_king_value), do: Scores.penalty_sum(score, pudel_king_value)
+
   # MATCHES
 
   def list_matches(), do: Matches.list()
@@ -51,6 +56,8 @@ defmodule PegelclubEx.Game do
   # PLAYERS
 
   def get_player!(id), do: Players.get!(id)
+
+  def update_player(%Player{} = player, attrs), do: Players.update(player, attrs)
 
   def delete_player(%Player{} = player), do: Players.delete(player)
   def list_players, do: Players.list()

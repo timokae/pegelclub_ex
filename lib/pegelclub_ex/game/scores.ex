@@ -43,6 +43,7 @@ defmodule PegelclubEx.Game.Scores do
     score
     |> Score.penalty_changeset(attrs)
     |> Repo.update()
+    |> broadcast(:score_updated)
   end
 
   def delete(%Score{} = score) do
@@ -105,5 +106,15 @@ defmodule PegelclubEx.Game.Scores do
       Players.starting_fee(score.player),
       penalty_pudel(score, pudel_king_value)
     ] |> Enum.sum()
+  end
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(PegelclubEx.PubSub, "scores")
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+  defp broadcast({:ok, score}, event) do
+    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "scores", {event, score})
+    {:ok, score}
   end
 end

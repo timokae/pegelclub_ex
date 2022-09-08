@@ -2,7 +2,7 @@ defmodule PegelclubEx.Game.Players do
   import Ecto.Query, warn: false
 
   alias PegelclubEx.Repo
-  alias PegelclubEx.Game.Player
+  alias PegelclubEx.Game.{Player, PlayerQuery}
 
   @guest_starting_fee 500
   @starting_fee 1000
@@ -14,28 +14,26 @@ defmodule PegelclubEx.Game.Players do
     Repo.get!(Player, id)
   end
 
+  def update(%Player{} = player, attrs) do
+    player
+    |> Player.changeset(attrs)
+    |> Repo.update()
+  end
+
   def delete(%Player{} = player) do
     Repo.delete(player)
   end
 
   def list do
-    Repo.all(Player)
+    Repo.all(PlayerQuery.all)
   end
 
   def list_regulars() do
-    query = from p in Player,
-      where: p.guest == false,
-      select: p
-
-    Repo.all(query)
+    Repo.all(PlayerQuery.regulars)
   end
 
   def list_guests() do
-    query = from p in Player,
-      where: p.guest == true,
-      select: p
-
-    Repo.all(query)
+    Repo.all(PlayerQuery.guests)
   end
 
   def create(attrs) do

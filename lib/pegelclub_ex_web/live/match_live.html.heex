@@ -4,13 +4,13 @@
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Gesamt</p>
-      <p class="title"><%= currency_format Map.get(@match_stats, :total) %></p>
+      <p class="title"><%# currency_format Map.get(@match_stats, :total) %></p>
     </div>
   </div>
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Durchschnitt</p>
-      <p class="title"><%= currency_format Map.get(@match_stats, :average) %></p>
+      <p class="title"><%# currency_format Map.get(@match_stats, :average) %></p>
     </div>
   </div>
 </section>
@@ -30,7 +30,7 @@
 </section>
 
 <div class="is-flex is-justify-content-center has-gap-5">
-  <%= link "Gast hinzufügen", to: Routes.match_score_path(@conn, :new, @match), class: "button is-rounded" %>
+  <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button is-rounded" %>
 
   <label class="checkbox">
     <input type="checkbox" id="toggle-hidable-cols" data-target="#match-table" checked>
@@ -58,36 +58,16 @@
       <th class="has-text-centered hideable-table-col">Summe Strafen</th>
       <th class="has-text-centered">inkl. Gebühren</th>
     </tr>
+    <span id="scores" phx-update="replace"></span>
     <%= for score <- @scores do %>
-      <tr>
-        <td class="has-text-centered"><%= player_symbol(score) %></td>
-        <td>
-          <%= link score.player.name, to: Routes.match_score_path(@conn, :edit, @match, score) %>
-          <%= pudel_king_symbol(score, Map.get(@match_stats, :pudel_king_value)) %>
-        </td>
-        <td class="has-text-right hideable-table-col">
-          <%= score.penalty_pudel %>
-        </td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_25 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_50 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_75 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_100 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_125 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_150 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_175 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.penalty_500 %></td>
-        <td class="has-text-right hideable-table-col"><%= score.delay %></td>
-        <td class="has-text-right hideable-table-col"><%= score.early_leave %></td>
-        <td class="has-text-right hideable-table-col"><%= score.other %></td>
-        <td class="has-text-right hideable-table-col"><%= currency_format PegelclubEx.Game.Scores.penalty_sum(score) %></td>
-        <td class="has-text-right">
-          <%= if @match_stats[:score_totals][score.id] do %>
-            <%= currency_format @match_stats[:score_totals][score.id] %>
-          <% else %>
-            <%= currency_format Map.get(@match_stats, :average) %>
-          <% end %>
-        </td>
-      </tr>
+      <.live_component module={PegelclubExWeb.ScoreComponent}, id={score.id}, score={score}, match_stats={@match_stats} />
     <% end %>
   </table>
 </div>
+
+<%= link "Spielstand löschen",
+  to: Routes.match_path(@socket, :delete, @match.id),
+  method: :delete,
+  data: [confirm: "Spielstand wirklich entfernen?"],
+  class: "button is-danger"
+%>

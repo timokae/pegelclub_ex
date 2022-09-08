@@ -2,7 +2,11 @@ defmodule PegelclubEx.Game.Matches do
   import Ecto.Query, warn: false
 
   alias PegelclubEx.Repo
-  alias PegelclubEx.Game.{Match, Matches, Score, Scores, Player, Players}
+  alias PegelclubEx.Game.{
+    Match, Matches, MatchQuery,
+    Score, Scores,
+    Player, Players
+  }
 
   def list do
     Repo.all(Match)
@@ -23,13 +27,8 @@ defmodule PegelclubEx.Game.Matches do
   end
 
   def list_guests(%Match{} = match) do
-    query = from s in Score,
-      join: p in assoc(s, :player),
-      where: s.match_id == ^match.id and p.guest == true,
-      select: s,
-      preload: [player: p]
-
-    Repo.all(query)
+    MatchQuery.guests(match)
+    |> Repo.all()
   end
 
   def list_addable_guests(match) do

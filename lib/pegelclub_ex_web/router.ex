@@ -2,6 +2,7 @@ defmodule PegelclubExWeb.Router do
   use PegelclubExWeb, :router
 
   import PegelclubExWeb.UserAuth
+  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -20,12 +21,14 @@ defmodule PegelclubExWeb.Router do
   scope "/", PegelclubExWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/match_live/:id", MatchLive
+
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
-    resources "/players", PlayerController, only: [:new, :create, :index]
+    resources "/players", PlayerController, only: [:new, :create, :edit, :update, :index]
 
-    resources "/matches", MatchController, only: [:index, :show, :new, :create] do
+    resources "/matches", MatchController, only: [:index, :show, :new, :create, :delete] do
       resources "/scores", ScoreController, only: [:new, :create, :edit, :update, :delete]
     end
   end

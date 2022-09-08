@@ -71,23 +71,22 @@ function initializeNavbar() {
 
 function initializeHideableCols() {
   const checkbox = document.querySelector('#toggle-hidable-cols');
-  if (checkbox) {
-    document.querySelectorAll('.hideable-table-col').forEach((el) => {
-      if (checkbox.checked) {
-        el.classList.remove('is-hidden');
-      } else {
-        el.classList.add('is-hidden');
-      }
-    });
 
-    checkbox.addEventListener('change', (event) => {
-      document.querySelectorAll('.hideable-table-col').forEach((el) => {
-        if (event.target.checked) {
-          el.classList.remove('is-hidden');
-        } else {
-          el.classList.add('is-hidden');
-        }
-      });
+  function setVisibility(target, show) {
+    if (show) {
+      target.classList.remove('hide-cols');
+    } else {
+      target.classList.add('hide-cols');
+    }
+  }
+
+  if (checkbox) {
+    const table = document.querySelector(checkbox.dataset.target);
+    setVisibility(table, checkbox.checked);
+
+    checkbox.addEventListener('change', (e) => {
+      console.log(e.currentTarget.checked)
+      setVisibility(table, e.currentTarget.checked);
     });
   }
 }

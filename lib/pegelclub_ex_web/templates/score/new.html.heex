@@ -1,4 +1,4 @@
-<h1 class="is-size-3">Existierenden Spieler hinzufügen</h1>
+<h1 class="title">Existierenden Spieler hinzufügen</h1>
 
 <.form let={f} for={@changeset} action={Routes.match_score_path(@conn, :create, @match)}>
 
@@ -16,4 +16,4 @@
 
 <hr class="my-5"/>
 
-<span><%= link "Back", to: Routes.match_path(@conn, :show, @match) %></span>
+<span><%= link "Back", to: Routes.live_path(@conn, PegelclubExWeb.MatchLive, @match.id) %></span>
