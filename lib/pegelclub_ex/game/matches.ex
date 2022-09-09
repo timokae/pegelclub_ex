@@ -4,7 +4,7 @@ defmodule PegelclubEx.Game.Matches do
   alias PegelclubEx.Repo
   alias PegelclubEx.Game.{
     Match, Matches, MatchQuery,
-    Score, Scores,
+    Scores,
     Player, Players
   }
 

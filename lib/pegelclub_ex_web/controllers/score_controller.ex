@@ -2,7 +2,7 @@ defmodule PegelclubExWeb.ScoreController do
   use PegelclubExWeb, :controller
 
   alias PegelclubEx.{Game, Repo}
-  alias PegelclubEx.Game.{Score, Match}
+  alias PegelclubEx.Game.{Score}
 
   def index(conn, _params) do
     scores = Game.list_scores()
