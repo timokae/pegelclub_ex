@@ -41,20 +41,14 @@ defmodule PegelclubEx.Game.Matches do
 
   def pudel_king_value(%Match{} = match) do
     match
-    |> Repo.preload(:scores)
-    |> Map.get(:scores)
-    |> Enum.map(fn s -> s.penalty_pudel end)
-    |> Enum.max
+    |> MatchQuery.with_scores()
+    |> Repo.aggregate(:max, :penalty_pudel)
   end
 
   def sorted_scores(%Match{} = match) do
-    query = from s in Score,
-      where: s.match_id == ^match.id,
-      select: s,
-      preload: :player
-
-    Repo.all(query)
-    |> Enum.sort_by(fn s -> s.player.name end)
+    match
+    |> MatchQuery.with_sorted_scores()
+    |> Repo.all()
   end
 
   def stats(match) do
