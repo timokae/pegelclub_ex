@@ -51,16 +51,24 @@ defmodule PegelclubEx.Game.Matches do
     |> Repo.all()
   end
 
-  def stats(match) do
+  def total(%Match{} = match, pudel_king) do
+    match
+      |> Map.get(:scores)
+      |> Enum.filter(fn s -> s.is_present == true end)
+      |> Map.new(fn s -> {s.id, Scores.total(s, pudel_king)} end)
+  end
+
+  def stats(%Match{} = match) do
     match = Repo.preload(match, scores: :player)
 
     pudel_king = pudel_king_value(match)
-    score_totals = match
-      |> Map.get(:scores)
-      |> Enum.filter(fn s -> s.is_present == true end)
-      |> Enum.reduce(%{}, fn s, acc -> Map.put(acc, s.id, Scores.total(s, pudel_king)) end)
 
-    match_total = Enum.reduce(score_totals, 0, fn {_, total}, acc -> acc + total end)
+    score_totals =total(match, pudel_king)
+
+    match_total = score_totals
+      |> Map.values()
+      |> Enum.sum()
+
     average = match_total / Enum.count(match.scores)
 
     %{
@@ -72,9 +80,8 @@ defmodule PegelclubEx.Game.Matches do
   end
 
   def all_stats() do
-    Enum.reduce(list(), %{}, fn m, acc ->
-      Map.put(acc, m.id, stats(m))
-    end)
+    list()
+    |> Map.new(fn match -> {match.id, stats(match)} end)
   end
 
   def add_player(%Match{} = match, %Player{} = player) do

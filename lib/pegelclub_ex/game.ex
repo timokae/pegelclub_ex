@@ -41,6 +41,8 @@ defmodule PegelclubEx.Game do
 
   def create_match_with_scores(attrs), do: Matches.create_with_scores(attrs)
 
+  def create_match(attrs), do: Matches.create(attrs)
+
   def delete_match(%Match{} = match), do: Matches.delete(match)
 
   def change_match(%Match{} = match, attrs), do: Match.changeset(match, attrs)

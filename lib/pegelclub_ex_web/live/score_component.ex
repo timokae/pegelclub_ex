@@ -6,7 +6,7 @@ defmodule PegelclubExWeb.ScoreComponent do
     ~H"""
     <tr>
       <td class="has-text-centered"><%= player_symbol(@score) %></td>
-      <td>
+      <td style="white-space: nowrap;">
         <%= live_patch @score.player.name, to: Routes.match_score_path(@socket, :edit, 7, @score) %>
         <%= pudel_king_symbol(@score, Map.get(@match_stats, :pudel_king_value)) %>
       </td>

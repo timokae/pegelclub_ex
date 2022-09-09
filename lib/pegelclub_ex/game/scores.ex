@@ -3,8 +3,8 @@ defmodule PegelclubEx.Game.Scores do
   alias PegelclubEx.Repo
   alias PegelclubEx.Game.{Players, Score}
 
-  @delay_limit 10_000
-  @early_leave_limit 10_000
+  @delay_limit 1_000
+  @early_leave_limit 1_000
 
   @penalty_delay 100
   @penalty_early_leave 100
@@ -101,11 +101,7 @@ defmodule PegelclubEx.Game.Scores do
   def total(score, pudel_king_value) do
     score = score |> Repo.preload(:player)
 
-    [
-      penalty_sum(score),
-      Players.starting_fee(score.player),
-      penalty_pudel(score, pudel_king_value)
-    ] |> Enum.sum()
+    penalty_sum(score, pudel_king_value) + Players.starting_fee(score.player)
   end
 
   def subscribe do
