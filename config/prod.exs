@@ -19,9 +19,8 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-#     config :pegelclub_ex, PegelclubExWeb.Endpoint,
-#       ...,
-#       url: [host: "example.com", port: 443],
+config :pegelclub_ex, PegelclubExWeb.Endpoint,
+  url: [host: "app.bochum-pegel.club", port: 443]
 #       https: [
 #         ...,
 #         port: 443,
@@ -43,7 +42,7 @@ config :logger, level: :info
 # We also recommend setting `force_ssl` in your endpoint, ensuring
 # no data is ever sent via http, always redirecting to https:
 #
-#     config :pegelclub_ex, PegelclubExWeb.Endpoint,
-#       force_ssl: [hsts: true]
+config :pegelclub_ex, PegelclubExWeb.Endpoint,
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
