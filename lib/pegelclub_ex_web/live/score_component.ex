@@ -1,5 +1,8 @@
 defmodule PegelclubExWeb.ScoreComponent do
   use Phoenix.LiveComponent
+
+  import PegelclubExWeb.Helpers
+
   alias PegelclubExWeb.Router.Helpers, as: Routes
 
   def render(assigns) do
@@ -56,10 +59,5 @@ defmodule PegelclubExWeb.ScoreComponent do
     else
       ""
     end
-  end
-
-  defp currency_format(number) do
-    [:erlang.float_to_binary(number / 100, [decimals: 2]), "€"]
-    |> Enum.join(" ")
   end
 end

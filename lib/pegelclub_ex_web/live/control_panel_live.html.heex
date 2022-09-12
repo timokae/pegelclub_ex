@@ -8,11 +8,11 @@
       <div class="control-panel-selector column is-one-third">
         <input
           type="radio"
-          id={dom_id(score)} name="name"
+          id={dom_id(score, "score")} name="name"
           value={score.id}
           phx-click="select-name"
         >
-        <label for={dom_id(score)} class="button"><%= score.player.name %></label>
+        <label for={dom_id(score, "score")} class="button"><%= score.player.name %></label>
       </div>
     <% end %>
   </div>

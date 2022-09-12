@@ -95,10 +95,6 @@ defmodule PegelclubExWeb.ControlPanelLive do
 
   # =========
 
-  def dom_id(score) do
-    "score_" <> to_string(score.id)
-  end
-
   def feed_message_id(score) do
     Enum.join(["feed_message", score.id, DateTime.utc_now |> DateTime.to_unix], "_")
   end

@@ -19,9 +19,4 @@ defmodule PegelclubExWeb.MatchView do
       ""
     end
   end
-
-  def currency_format(number) do
-    [:erlang.float_to_binary(number / 100, [decimals: 2]), "€"]
-    |> Enum.join(" ")
-  end
 end

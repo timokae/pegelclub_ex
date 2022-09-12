@@ -4,13 +4,13 @@
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Gesamt</p>
-      <p class="title"><%# currency_format Map.get(@match_stats, :total) %></p>
+      <p class="title"><%= currency_format Map.get(@match_stats, :total) %></p>
     </div>
   </div>
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Durchschnitt</p>
-      <p class="title"><%# currency_format Map.get(@match_stats, :average) %></p>
+      <p class="title"><%= currency_format Map.get(@match_stats, :average) %></p>
     </div>
   </div>
 </section>
@@ -29,7 +29,7 @@
   </div>
 </section>
 
-<div class="is-flex is-justify-content-center has-gap-5">
+<div class="is-flex is-justify-content-center is-flex-wrap-wrap has-gap-5">
   <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button is-rounded" %>
   <%= link "Control Panel", to: Routes.live_path(@socket, PegelclubExWeb.ControlPanelLive, @match), class: "button is-rounded" %>
 
@@ -61,7 +61,7 @@
     </tr>
     <span id="scores" phx-update="replace"></span>
     <%= for score <- @scores do %>
-      <.live_component module={PegelclubExWeb.ScoreComponent}, id={score.id}, score={score}, match_stats={@match_stats} />
+      <.live_component module={PegelclubExWeb.ScoreComponent}, id={dom_id(score, "score")}, score={score}, match_stats={@match_stats} />
     <% end %>
   </table>
 </div>

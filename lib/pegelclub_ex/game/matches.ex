@@ -63,7 +63,7 @@ defmodule PegelclubEx.Game.Matches do
 
     pudel_king = pudel_king_value(match)
 
-    score_totals =total(match, pudel_king)
+    score_totals = total(match, pudel_king)
 
     match_total = score_totals
       |> Map.values()

@@ -98,6 +98,8 @@ defmodule PegelclubExWeb do
       import PegelclubExWeb.ErrorHelpers
       import PegelclubExWeb.Gettext
       alias PegelclubExWeb.Router.Helpers, as: Routes
+
+      import PegelclubExWeb.Helpers
     end
   end
 

@@ -27,8 +27,4 @@ defmodule PegelclubExWeb.MatchLive do
   end
 
   def handle_info(_, socket), do: {:noreply, socket}
-
-  def dom_id(score) do
-    "score_" <> to_string(score.id)
-  end
 end
