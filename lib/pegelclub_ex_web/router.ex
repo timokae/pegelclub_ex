@@ -22,6 +22,7 @@ defmodule PegelclubExWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live "/match_live/:id", MatchLive
+    live "/control_panel_live/:id", ControlPanelLive
 
     get "/", PageController, :index
     get "/hello", HelloController, :index

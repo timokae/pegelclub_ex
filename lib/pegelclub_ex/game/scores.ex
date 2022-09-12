@@ -46,6 +46,30 @@ defmodule PegelclubEx.Game.Scores do
     |> broadcast(:score_updated)
   end
 
+  def increase_penalty(%Score{} = score, penalty) do
+    old_value = Map.get(score, penalty)
+
+    result =
+      Score.penalty_changeset(score, Map.put(%{}, penalty, old_value + 1))
+      |> Repo.update()
+
+    case result do
+      {:ok, score} ->
+        broadcast(result, :score_updated)
+        broadcast_increase({:ok, %{score: score, penalty: penalty}}, :score_incremented)
+      {:error, _reason} ->
+        broadcast_increase(result, :score_incremented)
+    end
+  end
+
+  def decrease_penalty(%Score{} = score, penalty) do
+    old_value = Map.get(score, penalty)
+
+    Score.penalty_changeset(score, Map.put(%{}, penalty, old_value - 1))
+    |> Repo.update()
+    |> broadcast(:score_updated)
+  end
+
   def delete(%Score{} = score) do
     Repo.delete(score)
   end
@@ -104,13 +128,26 @@ defmodule PegelclubEx.Game.Scores do
     penalty_sum(score, pudel_king_value) + Players.starting_fee(score.player)
   end
 
-  def subscribe do
-    Phoenix.PubSub.subscribe(PegelclubEx.PubSub, "scores")
+  def subscribe(match_id) do
+    Phoenix.PubSub.subscribe(PegelclubEx.PubSub, "match_scores_#{match_id}")
   end
 
   defp broadcast({:error, _reason} = error, _event), do: error
   defp broadcast({:ok, score}, event) do
-    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "scores", {event, score})
+    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores_#{score.match_id}", {event, score})
     {:ok, score}
   end
+
+  defp broadcast_increase({:error, _reason} = error, _event), do: error
+  defp broadcast_increase({:ok, increment_map}, event) do
+    score = Map.get(increment_map, :score)
+    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores_#{score.match_id}", {event, increment_map})
+    {:ok, increment_map}
+  end
+
+  # defp broadcast_decrease({:error, _reason} = error, _event), do: error
+  # defp broadcast_decrease({:ok, decrease_map}, event) do
+  #   Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "scores", {event, decrease_map})
+  #   {:ok, decrease_map}
+  # end
 end

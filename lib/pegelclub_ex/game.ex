@@ -18,6 +18,10 @@ defmodule PegelclubEx.Game do
 
   def update_score_penalties(%Score{} = score, attrs), do: Scores.update_penalties(score, attrs)
 
+  def increase_penalty(%Score{} = score, penalty), do: Scores.increase_penalty(score, penalty)
+
+  def decrease_penalty(%Score{} = score, penalty), do: Scores.decrease_penalty(score, penalty)
+
   def delete_score(%Score{} = score), do: Scores.delete(score)
 
   def change_score(%Score{} = score, attrs \\ %{}) do
@@ -28,7 +32,7 @@ defmodule PegelclubEx.Game do
     Score.penalty_changeset(score, attrs)
   end
 
-  def subscribe_to_scores, do: Scores.subscribe()
+  def subscribe_to_scores(match_id), do: Scores.subscribe(match_id)
 
   def penalty_sum(%Score{} = score), do: Scores.penalty_sum(score)
   def penalty_sum(%Score{} = score, pudel_king_value), do: Scores.penalty_sum(score, pudel_king_value)

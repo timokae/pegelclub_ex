@@ -48,7 +48,7 @@ defmodule PegelclubExWeb.ScoreController do
       {:ok, score} ->
         conn
         |> put_flash(:info, "Score updated successfully.")
-        |> redirect(to: Routes.match_path(conn, :show, score.match_id))
+        |> redirect(to: Routes.live_path(conn, PegelclubExWeb.MatchLive, score.match_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", score: score, changeset: changeset)

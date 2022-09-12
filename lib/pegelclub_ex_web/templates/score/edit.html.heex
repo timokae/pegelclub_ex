@@ -4,7 +4,7 @@
   assigns,
   %{
     action: Routes.match_score_path(@conn, :update, @score.match_id, @score),
-    cancel_link: Routes.match_path(@conn, :show, @score.match_id)
+    cancel_link: Routes.live_path(@conn, PegelclubExWeb.MatchLive, @score.match_id)
   }
 ) %>
 

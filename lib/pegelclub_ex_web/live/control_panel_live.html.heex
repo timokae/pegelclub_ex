@@ -1,0 +1,140 @@
+<%= link "Zurück", to: Routes.live_path(@socket, PegelclubExWeb.MatchLive, @match.id) %>
+
+<hr/>
+
+<div id="selector-wrapper" data-match-id={@match.id}>
+  <div class="columns is-multiline is-mobile name-selector">
+    <%= for score <- @scores do %>
+      <div class="control-panel-selector column is-one-third">
+        <input
+          type="radio"
+          id={dom_id(score)} name="name"
+          value={score.id}
+          phx-click="select-name"
+        >
+        <label for={dom_id(score)} class="button"><%= score.player.name %></label>
+      </div>
+    <% end %>
+  </div>
+
+  <hr/>
+
+  <div class="columns is-multiline is-mobile penalty-selector">
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_25"
+        name="penalty"
+        value="penalty_25"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_25" class="button">0.25 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_50"
+        name="penalty"
+        value="penalty_50"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_50" class="button">0.50 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_75"
+        name="penalty"
+        value="penalty_75"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_75" class="button">0.75 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_100"
+        name="penalty"
+        value="penalty_100"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_100" class="button">1.00 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_125"
+        name="penalty"
+        value="penalty_125"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_125" class="button">1.25 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_150"
+        name="penalty"
+        value="penalty_150"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_150" class="button">1.50 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_175"
+        name="penalty"
+        value="penalty_175"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_175" class="button">1.75 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_500"
+        name="penalty"
+        value="penalty_500"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_500" class="button">5.00 €</label>
+    </div>
+
+    <div class="control-panel-selector column is-one-third">
+      <input
+        type="radio"
+        id="penalty_pudel"
+        name="penalty"
+        value="penalty_pudel"
+        phx-click="select-penalty"
+      >
+      <label for="penalty_pudel" class="button">Pudel</label>
+    </div>
+  </div>
+
+  <hr/>
+
+  <ul class="feed" phx-update="replace" id="feed">
+    <%= for message <- @feed_messages do %>
+      <li
+        id={message[:id]}
+        class="my-2"
+        phx-click="decrement"
+        phx-value-penalty={message[:penalty]}
+        phx-value-message-id={message[:id]}
+        phx-value-score-id={message[:score_id]}
+      >
+        <%= message[:message] %>
+        <button class="button is-ghost p-0" style="height: unset;">Undo</button>
+      </li>
+    <% end %>
+  </ul>
+</div>

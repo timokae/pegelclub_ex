@@ -31,6 +31,7 @@
 
 <div class="is-flex is-justify-content-center has-gap-5">
   <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button is-rounded" %>
+  <%= link "Control Panel", to: Routes.live_path(@socket, PegelclubExWeb.ControlPanelLive, @match), class: "button is-rounded" %>
 
   <label class="checkbox">
     <input type="checkbox" id="toggle-hidable-cols" data-target="#match-table" checked>
