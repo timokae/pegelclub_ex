@@ -22,7 +22,7 @@ defmodule PegelclubExWeb.ScoreController do
       {:ok, score} ->
         conn
         |> put_flash(:info, "Score created successfully.")
-        |> redirect(to: Routes.match_path(conn, :show, score.match_id))
+        |> redirect(to: Routes.live_path(conn, PegelclubExWeb.MatchLive, score.match_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -61,6 +61,6 @@ defmodule PegelclubExWeb.ScoreController do
 
     conn
     |> put_flash(:info, "Player successfully removed from match!")
-    |> redirect(to: Routes.match_path(conn, :show, score.match_id))
+    |> redirect(to: Routes.live_path(conn, PegelclubExWeb.MatchLive, score.match_id))
   end
 end

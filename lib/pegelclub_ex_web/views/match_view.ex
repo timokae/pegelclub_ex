@@ -2,13 +2,15 @@ defmodule PegelclubExWeb.MatchView do
   use PegelclubExWeb, :view
 
   def player_symbol(score) do
-    cond do
-      !score.is_present ->
+    if score.is_present do
+      if score.player.guest do
         "🔹"
-      score.player.guest ->
-        "🔴"
-      !score.player.guest ->
+      else
         "🟢"
+      end
+    else
+      "sadasd"
+      "🔴"
     end
   end
 

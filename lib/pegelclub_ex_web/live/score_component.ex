@@ -42,7 +42,7 @@ defmodule PegelclubExWeb.ScoreComponent do
   end
 
   defp player_symbol(score) do
-    if (score.is_present) do
+    if score.is_present do
       if score.player.guest do
         "🔹"
       else
