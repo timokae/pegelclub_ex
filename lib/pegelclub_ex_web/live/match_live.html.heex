@@ -1,74 +1,58 @@
-<h1 class="title">Match vom <%= @match.played_at %></h1>
-
-<section class="level is-mobile mt-6">
-  <div class="level-item has-text-centered">
-    <div>
-      <p class="heading">Gesamt</p>
-      <p class="title"><%= currency_format Map.get(@match_stats, :total) %></p>
-    </div>
-  </div>
-  <div class="level-item has-text-centered">
-    <div>
-      <p class="heading">Durchschnitt</p>
-      <p class="title"><%= currency_format Map.get(@match_stats, :average) %></p>
-    </div>
-  </div>
-</section>
-<section class="level is-mobile">
-  <div class="level-item has-text-centered">
-    <div>
-      <p class="heading">Mitspieler</p>
-      <p class="title"><%= Enum.count(@scores) %></p>
-    </div>
-  </div>
-  <div class="level-item has-text-centered">
-    <div>
-      <p class="heading">Abwesend</p>
-      <p class="title"><%= Enum.count(@scores, fn s -> !s.is_present end) %></p>
-    </div>
+<section class="hero is-primary is-small">
+  <div class="hero-body">
+    <p class="subtitle">
+      Match vom
+    </p>
+    <p class="title">
+      <%= @match.played_at %>
+    </p>
   </div>
 </section>
 
-<div class="is-flex is-justify-content-center is-flex-wrap-wrap has-gap-5">
-  <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button is-rounded" %>
-  <%= link "Control Panel", to: Routes.live_path(@socket, PegelclubExWeb.ControlPanelLive, @match), class: "button is-rounded" %>
+<section class="content-container pt-6">
+  <div class="box is-flex is-justify-content-center is-flex-wrap-wrap has-gap-5">
+    <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button has-soft-shadow" %>
+    <%= link "Control Panel", to: Routes.live_path(@socket, PegelclubExWeb.ControlPanelLive, @match), class: "button has-soft-shadow" %>
 
-  <label class="checkbox">
-    <input type="checkbox" id="toggle-hidable-cols" data-target="#match-table" checked>
-    Strafen anzeigen
-  </label>
-</div>
+    <label class="checkbox">
+      <input type="checkbox" id="toggle-hidable-cols" data-target="#match-table" checked>
+      Strafen anzeigen
+    </label>
+  </div>
 
-<div class="table-container mt-6">
-  <table class="table is-striped mx-auto" id="match-table">
-    <tr>
-      <th>Gast</th>
-      <th>Spieler</th>
-      <th class="has-text-centered hideable-table-col">Pudel</th>
-      <th class="has-text-centered hideable-table-col">0.25 €</th>
-      <th class="has-text-centered hideable-table-col">0.50 €</th>
-      <th class="has-text-centered hideable-table-col">0.75 €</th>
-      <th class="has-text-centered hideable-table-col">1.00 €</th>
-      <th class="has-text-centered hideable-table-col">1.25 €</th>
-      <th class="has-text-centered hideable-table-col">1.50 €</th>
-      <th class="has-text-centered hideable-table-col">1.75 €</th>
-      <th class="has-text-centered hideable-table-col">5.00 €</th>
-      <th class="has-text-centered hideable-table-col">Verspätung</th>
-      <th class="has-text-centered hideable-table-col">Früher gehen</th>
-      <th class="has-text-centered hideable-table-col">Sonstiges</th>
-      <th class="has-text-centered hideable-table-col">Summe Strafen</th>
-      <th class="has-text-centered">inkl. Gebühren</th>
-    </tr>
-    <span id="scores" phx-update="replace"></span>
-    <%= for score <- @scores do %>
-      <.live_component module={PegelclubExWeb.ScoreComponent}, id={dom_id(score, "score")}, score={score}, match_stats={@match_stats} />
-    <% end %>
-  </table>
-</div>
+  <div class="table-container mt-6 has-soft-shadow">
+    <table class="table is-striped mx-auto" id="match-table">
+      <tr>
+        <th class="has-text-grey">Gast</th>
+        <th class="has-text-grey">Spieler</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">Pudel</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">0.25 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">0.50 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">0.75 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">1.00 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">1.25 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">1.50 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">1.75 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">5.00 €</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">Verspätung</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">Früher gehen</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">Sonstiges</th>
+        <th class="has-text-centered has-text-grey hideable-table-col">Summe Strafen</th>
+        <th class="has-text-centered has-text-grey">inkl. Gebühren</th>
+      </tr>
+      <span id="scores" phx-update="replace"></span>
+      <%= for score <- @scores do %>
+        <.live_component module={PegelclubExWeb.ScoreComponent}, id={dom_id(score, "score")}, score={score}, match_stats={@match_stats} />
+      <% end %>
+    </table>
+  </div>
 
-<%= link "Spielstand löschen",
-  to: Routes.match_path(@socket, :delete, @match.id),
-  method: :delete,
-  data: [confirm: "Spielstand wirklich entfernen?"],
-  class: "button is-danger"
-%>
+  <hr/>
+
+  <%= link "Spielstand löschen",
+    to: Routes.match_path(@socket, :delete, @match.id),
+    method: :delete,
+    data: [confirm: "Spielstand wirklich entfernen?"],
+    class: "button is-ghost has-text-danger"
+  %>
+</section>

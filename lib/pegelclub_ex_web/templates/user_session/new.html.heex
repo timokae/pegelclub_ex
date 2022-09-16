@@ -1,37 +1,42 @@
-<div class="box">
+<section class="content-container pt-6">
+  <div class="box">
 
-  <h1 class="title">Log in</h1>
+    <h1 class="title">Log in</h1>
 
-  <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-    <%= if @error_message do %>
-      <div class="alert alert-danger">
-        <p><%= @error_message %></p>
-      </div>
-    <% end %>
-
-    <div class="field mt-3">
-      <%= label f, :email, class: "label" %>
-      <div class="control">
-        <%= email_input f, :email, required: true, class: "input" %>
-      </div>
-    </div>
-
-    <div class="field mt-3">
-      <%= label f, "Passwort", class: "label" %>
-      <div class="control">
-        <%= password_input f, :password, required: true, class: "input" %>
-      </div>
-    </div>
-
-    <div class="field">
-      <%= label f, :remember_me, class: "checkbox" do %>
-        <%= checkbox f, :remember_me %>
-        Eingeloggt bleiben
+    <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+      <%= if @error_message do %>
+        <div class="alert alert-danger">
+          <p><%= @error_message %></p>
+        </div>
       <% end %>
-    </div>
 
-    <div>
-      <%= submit "Log in", class: "button is-primary" %>
-    </div>
-  </.form>
-</div>
+      <div class="field mt-3">
+        <%= label f, :email, class: "label" %>
+        <div class="control">
+          <%= email_input f, :email, required: true, class: "input" %>
+        </div>
+      </div>
+
+      <div class="field mt-3">
+        <%= label f, "Passwort", class: "label" %>
+        <div class="control has-icons-right">
+          <%= password_input f, :password, required: true, class: "input " %>
+          <span class="icon is-small is-right" id="reveal-user-password" style="pointer-events: initial">
+            <i class="ri-eye-fill"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= label f, :remember_me, class: "checkbox" do %>
+          <%= checkbox f, :remember_me %>
+          Eingeloggt bleiben
+        <% end %>
+      </div>
+
+      <div>
+        <%= submit "Log in", class: "button is-primary" %>
+      </div>
+    </.form>
+  </div>
+</section>

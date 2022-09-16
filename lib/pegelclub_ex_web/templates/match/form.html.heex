@@ -13,7 +13,8 @@
     <%= error_tag f, :played_at %>
   </div>
 
-  <div>
+  <div class="is-flex has-gap-3 is-justify-content-end">
+    <%= link "Zurück", to: Routes.match_path(@conn, :index), class: "button is-ghost" %>
     <%= submit "Save", class: "button is-primary" %>
   </div>
 </.form>

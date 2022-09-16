@@ -1,4 +1,6 @@
-<h1 class="title">Neues Spiel</h1>
+<section class="content-container pt-4">
+  <h1 class="title">Neues Spiel</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.match_path(@conn, :create)) %>
+  <%= render "form.html", Map.put(assigns, :action, Routes.match_path(@conn, :create)) %>
+</section>
 

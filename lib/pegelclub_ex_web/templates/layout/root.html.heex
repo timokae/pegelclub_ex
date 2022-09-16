@@ -19,43 +19,41 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-              <img src={Routes.static_path(@conn, "/images/logo.png")} alt="Phoenix Framework Logo"/>
-              <div class="ml-2">
-                <p class="is-size-4 hast-text-weight-bold">Pegel<span class="is-size-5 has-text-weight-light">club</span></p>
-
-              </div>
-            </a>
-
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
-
-          <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-              <%= if @current_user do %>
-              <% end %>
-
-              <%= link "Regeln", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
-              <%= link "Spieler", to: Routes.player_path(@conn, :index), class: "navbar-item" %>
-              <%= link "Spielstände", to: Routes.match_path(@conn, :index), class: "navbar-item" %>
+      <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src={Routes.static_path(@conn, "/images/logo.png")} alt="Phoenix Framework Logo"/>
+            <div class="ml-2">
+              <p class="is-size-4 hast-text-weight-bold">Pegel<span class="is-size-5 has-text-weight-light">club</span></p>
 
             </div>
+          </a>
 
-            <div class="navbar-end">
-              <%= render "_user_menu.html", assigns %>
-            </div>
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <%= if @current_user do %>
+            <% end %>
+
+            <%= link "Regeln", to: Routes.page_path(@conn, :index), class: "navbar-item" %>
+            <%= link "Spieler", to: Routes.player_path(@conn, :index), class: "navbar-item" %>
+            <%= link "Spielstände", to: Routes.match_path(@conn, :index), class: "navbar-item" %>
+
           </div>
-        </nav>
-      </section>
+
+          <div class="navbar-end">
+            <%= render "_user_menu.html", assigns %>
+          </div>
+        </div>
+      </nav>
     </header>
-    <section class="container is-fullhd px-4 py-5">
+    <section class="container is-fullhd page-container">
       <%= @inner_content %>
     </section>
   </body>

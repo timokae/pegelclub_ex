@@ -9,6 +9,31 @@
 @import "./switch.scss";
 @import "./control_panel.scss";
 
+.page-container {
+  min-height: 100vh;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0.5rem;
+    width: 1px;
+    background-color: hsla(233, 26%, 35%, 0.06);
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0.5rem;
+    width: 1px;
+    background-color: hsla(233, 26%, 35%, 0.06);
+    z-index: -1;
+  }
+}
 
 
 /* Alerts and form errors used by phx.new */

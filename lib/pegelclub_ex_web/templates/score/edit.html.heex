@@ -1,21 +1,32 @@
-<h1 class="title"><%= title @score.player.name %> Spielstand</h1>
+<section class="hero is-primary is-small">
+  <div class="hero-body">
+    <p class="title">
+      <%= title @score.player.name %>
+    </p>
+    <p class="subtitle">
+      Spielstand
+    </p>
+  </div>
+</section>
 
-<%= render "penalty_form.html", Map.merge(
-  assigns,
-  %{
-    action: Routes.match_score_path(@conn, :update, @score.match_id, @score),
-    cancel_link: Routes.live_path(@conn, PegelclubExWeb.MatchLive, @score.match_id)
-  }
-) %>
+<section class="content-container pt-6">
+  <%= render "penalty_form.html", Map.merge(
+    assigns,
+    %{
+      action: Routes.match_score_path(@conn, :update, @score.match_id, @score),
+      cancel_link: Routes.live_path(@conn, PegelclubExWeb.MatchLive, @score.match_id)
+    }
+  ) %>
 
 
-<%= if @score.player.guest do %>
-  <hr/>
+  <%= if @score.player.guest do %>
+    <hr/>
 
-  <%= link "Spieler entfernen",
-    to: Routes.match_score_path(@conn, :delete, @score.match_id, @score),
-    method: :delete,
-    data: [confirm: "Spieler wirklich entfernen?"],
-    class: "button is-danger"
-  %>
-<% end %>
+    <%= link "Spieler entfernen",
+      to: Routes.match_score_path(@conn, :delete, @score.match_id, @score),
+      method: :delete,
+      data: [confirm: "Spieler wirklich entfernen?"],
+      class: "button is-ghost has-text-danger"
+    %>
+  <% end %>
+</section>

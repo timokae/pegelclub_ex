@@ -1,25 +1,33 @@
-<h1 class="title">Spieler</h1>
+<section class="hero is-primary is-small">
+  <div class="hero-body">
+    <p class="title">
+      Spieler
+    </p>
+  </div>
+</section>
 
-<%= link "Spieler anlegen", to: Routes.player_path(@conn, :new), class: "button is-rounded mt-5" %>
+<section class="content-container pt-6">
+  <%= link "Spieler anlegen", to: Routes.player_path(@conn, :new), class: "button is-rounded mt-5" %>
 
-<table class="table mt-5">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Stammspieler</th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for player <- @players do %>
-    <tr>
-      <td><%= link player.name, to: Routes.player_path(@conn, :edit, player) %></td>
-      <td><%= player_type(player) %></td>
+  <table class="table mt-5">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stammspieler</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for player <- @players do %>
+          <tr>
+            <td><%= link player.name, to: Routes.player_path(@conn, :edit, player) %></td>
+            <td><%= player_type(player) %></td>
 
 
-      <td>
-        <span><%# link "Edit", to: Routes.player_path(@conn, :edit, player) %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+            <td>
+              <span><%# link "Edit", to: Routes.player_path(@conn, :edit, player) %></span>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
