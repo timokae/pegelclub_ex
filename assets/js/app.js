@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeNavbar();
   initializeHideableCols();
   initializePenaltyButtons();
+  initializePasswordReveal();
 });
 
 function initializeNavbar() {
@@ -133,4 +134,24 @@ function initializePenaltyButtons() {
       }
     })
   });
+}
+
+function initializePasswordReveal() {
+  const eyeOpenIcon = 'ri-eye-fill';
+  const eyeClosedIcon = 'ri-eye-close-fill';
+  const passwordIcon = document.querySelector('#reveal-user-password i');
+  const passwordInput = document.querySelector('#user_password');
+  if (passwordIcon && passwordInput) {
+    passwordIcon.addEventListener('click', (e) => {
+      if (passwordIcon.classList.contains(eyeOpenIcon)) {
+        passwordInput.type = 'text';
+        passwordIcon.classList.add(eyeClosedIcon);
+        passwordIcon.classList.remove(eyeOpenIcon);
+      } else {
+        passwordInput.type = 'password';
+        passwordIcon.classList.add(eyeOpenIcon);
+        passwordIcon.classList.remove(eyeClosedIcon);
+      }
+    });
+  }
 }
