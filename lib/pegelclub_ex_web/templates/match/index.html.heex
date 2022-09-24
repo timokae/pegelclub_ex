@@ -16,21 +16,21 @@
     <table class="table is-striped mx-auto">
       <thead>
         <tr>
-          <th>Datum</th>
-          <th>Einnahmen</th>
-          <th>Durchschnitt</th>
-          <th>Pudelkönig:in</th>
+          <th class="is-white-space-nowrap">Datum</th>
+          <th class="is-white-space-nowrap">Einnahmen</th>
+          <th class="is-white-space-nowrap">Durchschnitt</th>
+          <th class="is-white-space-nowrap">Pudelkönig:in</th>
         </tr>
       </thead>
       <tbody>
     <%= for match <- @matches do %>
       <tr>
-        <td>
+        <td class="is-white-space-nowrap">
           <%= link date_format(match.played_at), to: Routes.live_path(@conn, PegelclubExWeb.MatchLive, match.id) %>
         </td>
-        <td class="has-text-right"><%= currency_format @stats[match.id][:total] %></td>
-        <td class="has-text-right"><%= currency_format @stats[match.id][:average] %></td>
-        <td class="has-text-right"><%= @stats[match.id][:pudel_king_value] %></td>
+        <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:total] %></td>
+        <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:average] %></td>
+        <td class="has-text-right is-white-space-nowrap"><%= @stats[match.id][:pudel_king_value] %></td>
       </tr>
     <% end %>
       </tbody>

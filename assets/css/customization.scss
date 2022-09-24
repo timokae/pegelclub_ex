@@ -38,6 +38,10 @@ hr {
   &-7 { gap: 0.75rem; }
 }
 
+.is-white-space-nowrap {
+  white-space: nowrap;
+}
+
 .checkbox {
   display: flex;
   align-items: center;
@@ -48,7 +52,7 @@ hr {
 }
 
 .table {
-  th, td {
+  th {
     white-space: nowrap;
   }
 }
