@@ -26,7 +26,7 @@
     <%= for match <- @matches do %>
       <tr>
         <td>
-          <%= link match.played_at, to: Routes.live_path(@conn, PegelclubExWeb.MatchLive, match.id) %>
+          <%= link date_format(match.played_at), to: Routes.live_path(@conn, PegelclubExWeb.MatchLive, match.id) %>
         </td>
         <td class="has-text-right"><%= currency_format @stats[match.id][:total] %></td>
         <td class="has-text-right"><%= currency_format @stats[match.id][:average] %></td>

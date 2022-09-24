@@ -5,6 +5,11 @@ defmodule PegelclubExWeb.Helpers do
     |> Enum.join(" ")
   end
 
+  def date_format(date) do
+    date
+    |> Calendar.strftime("%d.%m.%Y")
+  end
+
   def dom_id(%{id: id}, prefix) when is_list(prefix) do
     prefix
     |> Kernel.++([id])
