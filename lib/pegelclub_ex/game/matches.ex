@@ -71,11 +71,21 @@ defmodule PegelclubEx.Game.Matches do
 
     average = match_total / Enum.count(match.scores)
 
+    penalty_king = score_totals
+      |> Enum.max_by(fn {_id, total} -> total end)
+      |> Kernel.elem(1)
+
+    penalty_saver = score_totals
+      |> Enum.min_by(fn {_id, total} -> total end)
+      |> Kernel.elem(1)
+
     %{
       pudel_king_value: pudel_king,
       total: match_total,
       score_totals: score_totals,
-      average: average
+      average: average,
+      penalty_king: penalty_king,
+      penalty_saver: penalty_saver
     }
   end
 

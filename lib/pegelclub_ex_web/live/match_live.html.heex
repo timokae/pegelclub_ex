@@ -10,41 +10,53 @@
 </section>
 
 <section class="content-container pt-6">
-  <div class="box is-flex is-justify-content-center is-flex-wrap-wrap has-gap-5">
+  <div class="is-flex is-justify-content-center is-flex-wrap-wrap has-gap-5">
     <%= link "Gast hinzufügen", to: Routes.match_score_path(@socket, :new, @match), class: "button has-soft-shadow" %>
     <%= link "Control Panel", to: Routes.live_path(@socket, PegelclubExWeb.ControlPanelLive, @match), class: "button has-soft-shadow" %>
-
-    <label class="checkbox">
-      <input type="checkbox" id="toggle-hidable-cols" data-target="#match-table" checked>
-      Strafen anzeigen
-    </label>
   </div>
 
-  <div class="table-container mt-6 has-soft-shadow">
-    <table class="table is-striped mx-auto" id="match-table">
-      <tr>
-        <th class="has-text-grey">Gast</th>
-        <th class="has-text-grey">Spieler</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">Pudel</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">0.25 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">0.50 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">0.75 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">1.00 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">1.25 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">1.50 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">1.75 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">5.00 €</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">Verspätung</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">Früher gehen</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">Sonstiges</th>
-        <th class="has-text-centered has-text-grey hideable-table-col">Summe Strafen</th>
-        <th class="has-text-centered has-text-grey">inkl. Gebühren</th>
-      </tr>
-      <span id="scores" phx-update="replace"></span>
-      <%= for score <- @scores do %>
-        <.live_component module={PegelclubExWeb.ScoreComponent}, id={dom_id(score, "score")}, score={score}, match_stats={@match_stats} />
-      <% end %>
-    </table>
+  <div class="mt-6 is-size-7">
+    <p class="has-text-grey">
+      <span class="has-text-grey-dark has-text-weight-bold is-size-5"><%= currency_format @match_stats.total %></span>
+      <br>
+      wurden ingesamt erspielt
+    </p>
+
+    <p class="has-text-grey mt-2">
+      <span class="has-text-grey-dark has-text-weight-bold is-size-5"><%= Enum.count(@scores) %></span>
+      <br>
+      Spieler haben teilgenommen
+    </p>
+  </div>
+
+  <span id="scores" phx-update="replace"></span>
+  <div class="mt-6 is-flex is-flex-direction-column has-gap-2">
+    <%= for score <- @scores do %>
+      <.live_component module={PegelclubExWeb.ScoreComponent}, id={dom_id(score, "score")}, score={score}, match_stats={@match_stats} />
+    <% end %>
+  </div>
+
+  <div class="is-flex is-flex-direction-column is-size-7 mt-2 has-text-grey">
+    <div class="is-flex is-align-items-baseline">
+      <span class="icon">
+        <i class="ri-vip-crown-fill"></i>
+      </span>
+      Pudelkönig:in
+    </div>
+
+    <div class="is-flex is-align-items-baseline">
+      <span class="icon">
+        <i class="ri-fire-fill"></i>
+      </span>
+      Spieler mit den höchsten Strafen
+    </div>
+
+    <div class="is-flex is-align-items-baseline">
+      <span class="icon">
+        <i class="ri-leaf-fill"></i>
+      </span>
+      Spieler mit den niedrigsten Strafen
+    </div>
   </div>
 
   <hr/>

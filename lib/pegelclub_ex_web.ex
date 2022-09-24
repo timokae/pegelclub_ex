@@ -47,6 +47,8 @@ defmodule PegelclubExWeb do
       use Phoenix.LiveView,
         layout: {PegelclubExWeb.LayoutView, "live.html"}
 
+        alias Phoenix.LiveView.JS
+
       unquote(view_helpers())
     end
   end
@@ -54,6 +56,8 @@ defmodule PegelclubExWeb do
   def live_component do
     quote do
       use Phoenix.LiveComponent
+
+      alias Phoenix.LiveView.JS
 
       unquote(view_helpers())
     end

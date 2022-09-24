@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+.has-text-color-primary-dark {
+  color: $primary-dark !important;
+}
+
 .is-full-width {
   width: 100%;
 }
@@ -52,7 +56,7 @@ hr {
 .button {
   touch-action: manipulation;
 
-  background-color: hsl(210, 73%, 15%);
+  background-color: $primary-dark;
   color: white;
   border-radius: 1rem;
   border: none;
