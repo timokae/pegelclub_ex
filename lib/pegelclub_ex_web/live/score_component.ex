@@ -9,29 +9,42 @@ defmodule PegelclubExWeb.ScoreComponent do
   def render(assigns) do
     ~H"""
     <div class="score-box box is-flex is-flex-direction-column my-0">
-      <header class="is-flex is-flex-direction-row is-align-items-center">
+      <header class="is-flex is-flex-direction-row is-justify-content-space-between">
+        <div class="is-flex is-flex-direction-row is-align-items-center">
+          <%= live_patch(
+            @score.player.name,
+            to: Routes.match_score_path(@socket, :edit, 7, @score),
+            class: "has-text-grey-dark has-text-weight-bold"
+          ) %>
+
+          <%= if @score.penalty_pudel == Map.get(@match_stats, :pudel_king_value) do%>
+            <span class="icon ml-2">
+              <i class="ri-vip-crown-fill"></i>
+            </span>
+          <% end %>
+
+          <%= if @match_stats[:score_totals][@score.id] == @match_stats.penalty_king do %>
+            <span class="icon">
+              <i class="ri-fire-fill"></i>
+            </span>
+          <% end %>
+
+          <%= if @match_stats[:score_totals][@score.id] == @match_stats.penalty_saver do %>
+            <span class="icon">
+              <i class="ri-leaf-fill"></i>
+            </span>
+          <% end %>
+        </div>
+
         <%= live_patch(
-          @score.player.name,
           to: Routes.match_score_path(@socket, :edit, 7, @score),
           class: "has-text-grey-dark has-text-weight-bold"
-        ) %>
-
-        <%= if @score.penalty_pudel == Map.get(@match_stats, :pudel_king_value) do%>
-          <span class="icon ml-2">
-            <i class="ri-vip-crown-fill"></i>
-          </span>
-        <% end %>
-
-        <%= if @match_stats[:score_totals][@score.id] == @match_stats.penalty_king do %>
-          <span class="icon">
-            <i class="ri-fire-fill"></i>
-          </span>
-        <% end %>
-
-        <%= if @match_stats[:score_totals][@score.id] == @match_stats.penalty_saver do %>
-          <span class="icon">
-            <i class="ri-leaf-fill"></i>
-          </span>
+        ) do %>
+          <button class="button is-ghost">
+            <span class="icon">
+              <i class="ri-edit-2-fill ri-lg"></i>
+            </span>
+          </button>
         <% end %>
       </header>
 
