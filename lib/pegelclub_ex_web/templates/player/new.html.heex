@@ -10,8 +10,8 @@
   <%= render "form.html", Map.merge(
     assigns,
     %{
-      action: Routes.player_path(@conn, :create),
-      cancel_link: Routes.player_path(@conn, :index)
+      action: Routes.player_path(@conn, :create, redirect: @redirect_url),
+      cancel_link: @redirect_url
     }
   ) %>
 </section>

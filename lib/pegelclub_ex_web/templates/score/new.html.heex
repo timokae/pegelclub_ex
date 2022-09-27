@@ -1,7 +1,7 @@
 <section class="hero is-primary is-small">
   <div class="hero-body">
     <p class="title">
-      Existierenden Spieler hinzufügen
+      Spieler hinzufügen
     </p>
   </div>
 </section>
@@ -20,6 +20,10 @@
     </div>
 
   </.form>
+
+  <hr class="my-5"/>
+
+  <%= link "Neuen Spieler erstellen", to: Routes.player_path(@conn, :new, redirect: URI.encode_www_form(Routes.match_score_path(@conn, :new, @match.id))) %>
 
   <hr class="my-5"/>
 

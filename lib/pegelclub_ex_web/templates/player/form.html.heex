@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <%= hidden_input f, :redirect, value: @cancel_link %>
+
   <div class="field mt-5">
     <%= label f, :name, class: "label" %>
     <div class="control">
@@ -21,7 +23,7 @@
   </div>
 
   <div class="is-flex has-gap-3 is-justify-content-end">
-    <%= link "Zurück", to: @cancel_link, class: "button is-ghost" %>
+    <%= link "Zurück", to: URI.decode_www_form(@cancel_link), class: "button is-ghost" %>
     <%= submit "Save", class: "button is-primary" %>
   </div>
 </.form>
