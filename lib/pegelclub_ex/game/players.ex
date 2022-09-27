@@ -29,11 +29,29 @@ defmodule PegelclubEx.Game.Players do
   end
 
   def list_regulars() do
-    Repo.all(PlayerQuery.regulars)
+    Player
+    |> PlayerQuery.regulars()
+    |> Repo.all()
+  end
+
+  def list_active_regulars() do
+    Player
+    |> PlayerQuery.regulars()
+    |> PlayerQuery.active()
+    |> Repo.all()
   end
 
   def list_guests() do
-    Repo.all(PlayerQuery.guests)
+    Player
+    |> PlayerQuery.guests()
+    |> Repo.all()
+  end
+
+  def list_active_guests() do
+    Player
+    |> PlayerQuery.guests()
+    |> PlayerQuery.active()
+    |> Repo.all()
   end
 
   def create(attrs) do

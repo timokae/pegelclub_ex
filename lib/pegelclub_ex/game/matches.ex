@@ -36,7 +36,7 @@ defmodule PegelclubEx.Game.Matches do
       |> Matches.list_guests
       |> Enum.map(fn s -> s.player end)
 
-    Players.list_guests() -- guests
+    Players.list_active_guests() -- guests
   end
 
   def pudel_king_value(%Match{} = match) do
@@ -103,7 +103,7 @@ defmodule PegelclubEx.Game.Matches do
 
     case match do
       {:ok, match } ->
-        for player <- Players.list_regulars() do
+        for player <- Players.list_active_regulars() do
           add_player(match, player)
         end
         {:ok, match}

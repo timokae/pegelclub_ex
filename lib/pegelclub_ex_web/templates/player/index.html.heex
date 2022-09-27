@@ -14,6 +14,7 @@
       <tr>
         <th>Name</th>
         <th>Stammspieler</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
@@ -21,11 +22,7 @@
           <tr>
             <td><%= link player.name, to: Routes.player_path(@conn, :edit, player) %></td>
             <td><%= player_type(player) %></td>
-
-
-            <td>
-              <span><%# link "Edit", to: Routes.player_path(@conn, :edit, player) %></span>
-            </td>
+            <td><%= if player.active, do: "Aktiv", else: "Inaktiv" %></td>
           </tr>
       <% end %>
     </tbody>

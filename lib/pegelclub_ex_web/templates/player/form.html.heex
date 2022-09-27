@@ -16,9 +16,16 @@
   </div>
 
   <div class="field mt-5">
-    <%= label f, :guest, class: "Gast" do %>
+    <%= label f, :guest do %>
       <%= checkbox f, :guest %>
       Spieler ist Gast
+    <% end %>
+  </div>
+
+  <div class="field mt-5">
+    <%= label f, :active do %>
+      <%= checkbox f, :active %>
+      Spieler ist aktiv
     <% end %>
   </div>
 
