@@ -27,6 +27,12 @@
       <br>
       Spieler haben teilgenommen
     </p>
+
+    <p class="has-text-grey mt-2">
+      <span class="has-text-grey-dark has-text-weight-bold is-size-5"><%= Enum.filter(@scores, fn score -> score.has_payed end) |> Enum.count %></span>
+      <br>
+      Spieler haben bezahlt
+    </p>
   </div>
 
   <span id="scores" phx-update="replace"></span>
@@ -57,6 +63,14 @@
       </span>
       Spieler mit den niedrigsten Strafen
     </div>
+
+    <div class="is-flex is-align-items-baseline">
+      <span class="icon">
+        <i class="ri-check-line"></i>
+      </span>
+      Spieler hat bezahlt
+    </div>
+
   </div>
 
   <hr/>

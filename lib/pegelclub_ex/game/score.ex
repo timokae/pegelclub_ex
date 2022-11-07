@@ -19,6 +19,7 @@ defmodule PegelclubEx.Game.Score do
     field :penalty_pudel, :integer, default: 0
 
     field :is_present, :boolean, default: true
+    field :has_payed,  :boolean, default: false
 
     belongs_to :match, Match
     belongs_to :player, Player
@@ -41,7 +42,7 @@ defmodule PegelclubEx.Game.Score do
 
   def penalty_changeset(score, attrs) do
     score
-    |> cast(attrs, [:penalty_pudel, :penalty_25, :penalty_50, :penalty_75, :penalty_100, :penalty_125, :penalty_150, :penalty_175, :penalty_500, :early_leave, :delay, :other, :is_present])
+    |> cast(attrs, [:penalty_pudel, :penalty_25, :penalty_50, :penalty_75, :penalty_100, :penalty_125, :penalty_150, :penalty_175, :penalty_500, :early_leave, :delay, :other, :is_present, :has_payed])
     |> validate_number(:penalty_pudel, greater_than_or_equal_to: 0)
     |> validate_number(:penalty_25, greater_than_or_equal_to: 0)
     |> validate_number(:penalty_50, greater_than_or_equal_to: 0)

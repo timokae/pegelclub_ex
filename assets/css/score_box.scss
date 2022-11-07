@@ -3,4 +3,8 @@
 .score-box {
   overflow: hidden;
   border-top: 10px solid $primary-dark;
+
+  &.has-payed {
+    border-top: 10px solid $success;
+  }
 }

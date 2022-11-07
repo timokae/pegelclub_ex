@@ -6,6 +6,16 @@
   <% end %>
 
   <div class="penalty-wrapper">
+
+    <div class="field mt-5">
+      <%= label f, :has_payed, class: "checkbox" do %>
+        <%= checkbox f, :has_payed %>
+        Spieler hat bezahlt
+      <% end %>
+    </div>
+
+    <hr/>
+
     <div class="field mt-5 mt-5">
       <%= label f, "Pudel", class: "label" %>
       <div class="control is-flex">

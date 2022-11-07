@@ -20,6 +20,7 @@
           <th class="is-white-space-nowrap">Einnahmen</th>
           <th class="is-white-space-nowrap">Durchschnitt</th>
           <th class="is-white-space-nowrap">Pudelkönig:in</th>
+          <th class="is-white-space-nowrap">Bezahlt</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,11 @@
         <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:total] %></td>
         <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:average] %></td>
         <td class="has-text-right is-white-space-nowrap"><%= @stats[match.id][:pudel_king_value] %></td>
+        <td class="has-text-right is-white-space-nowrap">
+          <%= PegelclubEx.Game.match_scores_sorted_by_name(match) |> Enum.filter(fn score -> score.has_payed end) |> Enum.count %>
+          /
+          <%= PegelclubEx.Game.match_scores_sorted_by_name(match) |> Enum.count %>
+        </td>
       </tr>
     <% end %>
       </tbody>
