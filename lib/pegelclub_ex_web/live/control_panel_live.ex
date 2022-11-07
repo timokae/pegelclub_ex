@@ -30,7 +30,6 @@ defmodule PegelclubExWeb.ControlPanelLive do
 
     socket = update(socket, :feed_messages, fn feed_messages ->
       [ %{id: feed_message_id(score), message: message, penalty: penalty, score_id: score.id} | feed_messages ]
-      |> Enum.take(5)
     end)
 
     {:noreply, socket}
