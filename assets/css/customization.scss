@@ -87,6 +87,15 @@ hr {
       text-decoration: none;
     }
   }
+
+  &[disabled] {
+    background-color: $primary-dark;
+
+    &:hover {
+      background-color: $primary-dark;
+      opacity: 0.5;
+    }
+  }
 }
 
 .input {

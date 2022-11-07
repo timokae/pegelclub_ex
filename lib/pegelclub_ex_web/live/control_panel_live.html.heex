@@ -12,15 +12,22 @@
   <div id="selector-wrapper" data-match-id={@match.id}>
     <div class="columns is-multiline is-mobile name-selector mb-0 px-1">
       <%= for score <- @scores do %>
-        <div class="control-panel-selector column is-one-third">
-          <input
-            type="radio"
-            id={dom_id(score, "score")} name="name"
-            value={score.id}
-            phx-click="select-name"
-          >
-          <label for={dom_id(score, "score")} class="button"><%= score.player.name %></label>
-        </div>
+        <%= if score.is_present do %>
+          <div class="control-panel-selector column is-one-third">
+            <input
+              type="radio"
+              id={dom_id(score, "score")}
+              name="name"
+              value={score.id}
+              phx-click="select-name"
+            >
+            <label for={dom_id(score, "score")} class="button"><%= score.player.name %></label>
+          </div>
+        <% else %>
+          <div class="control-panel-selector column is-one-third">
+            <label class="button" disabled><%= score.player.name %></label>
+          </div>
+        <% end %>
       <% end %>
     </div>
 
