@@ -137,16 +137,19 @@
     <hr/>
 
     <ul class="feed" phx-update="replace" id="feed">
-      <%= for message <- @feed_messages do %>
+      <%= for item <- @feed_items do %>
         <li
-          id={message[:id]}
+          id={item[:id]}
           class="my-2 is-flex is-justify-content-space-between is-align-items-baseline"
           phx-click="decrement"
-          phx-value-penalty={message[:penalty]}
-          phx-value-message-id={message[:id]}
-          phx-value-score-id={message[:score_id]}
+          phx-value-penalty={item[:penalty]}
+          phx-value-item-id={item[:id]}
+          phx-value-score-id={item[:score_id]}
         >
-          <%= message[:message] %>
+          <span>
+            <span class="has-text-grey mr-4 has-text-grey-light"><%= Timex.format!(item.created_at, "{h12}:{m}:{s}") %></span>
+            <%= item[:message] %>
+          </span>
           <button class="button is-ghost p-0" style="height: unset;">Undo</button>
         </li>
       <% end %>

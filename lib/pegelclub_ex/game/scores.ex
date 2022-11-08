@@ -56,9 +56,9 @@ defmodule PegelclubEx.Game.Scores do
     case result do
       {:ok, score} ->
         broadcast(result, :score_updated)
-        broadcast_increase({:ok, %{score: score, penalty: penalty}}, :score_incremented)
+        broadcast_feed_item_added({:ok, %{score: score, penalty: penalty}})
       {:error, _reason} ->
-        broadcast_increase(result, :score_incremented)
+        broadcast_feed_item_added(result)
     end
   end
 
@@ -132,17 +132,20 @@ defmodule PegelclubEx.Game.Scores do
     Phoenix.PubSub.subscribe(PegelclubEx.PubSub, "match_scores_#{match_id}")
   end
 
+  def subscribe() do
+    Phoenix.PubSub.subscribe(PegelclubEx.PubSub, "match_scores")
+  end
+
   defp broadcast({:error, _reason} = error, _event), do: error
   defp broadcast({:ok, score}, event) do
     Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores_#{score.match_id}", {event, score})
     {:ok, score}
   end
 
-  defp broadcast_increase({:error, _reason} = error, _event), do: error
-  defp broadcast_increase({:ok, increment_map}, event) do
-    score = Map.get(increment_map, :score)
-    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores_#{score.match_id}", {event, increment_map})
-    {:ok, increment_map}
+  defp broadcast_feed_item_added({:error, _reason} = error), do: error
+  defp broadcast_feed_item_added({:ok, item}) do
+    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores", {:feed_item_added, item})
+    {:ok, item}
   end
 
   # defp broadcast_decrease({:error, _reason} = error, _event), do: error

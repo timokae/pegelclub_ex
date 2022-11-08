@@ -15,9 +15,11 @@ defmodule PegelclubEx.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: PegelclubEx.PubSub},
       # Start the Endpoint (http/https)
-      PegelclubExWeb.Endpoint
+      PegelclubExWeb.Endpoint,
       # Start a worker by calling: PegelclubEx.Worker.start_link(arg)
       # {PegelclubEx.Worker, arg}
+
+      {PegelclubEx.Game.ControlPanelServer, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

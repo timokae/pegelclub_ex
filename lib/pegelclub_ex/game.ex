@@ -33,6 +33,7 @@ defmodule PegelclubEx.Game do
   end
 
   def subscribe_to_scores(match_id), do: Scores.subscribe(match_id)
+  def subscribe_to_scores(), do: Scores.subscribe()
 
   def penalty_sum(%Score{} = score), do: Scores.penalty_sum(score)
   def penalty_sum(%Score{} = score, pudel_king_value), do: Scores.penalty_sum(score, pudel_king_value)

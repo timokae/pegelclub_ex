@@ -9,11 +9,23 @@ defmodule PegelclubExWeb.ControlPanelLive do
     match = Game.get_match!(id)
     scores = Game.match_scores_sorted_by_name(match)
 
+    feed_items = Enum.map(
+      Game.ControlPanelServer.get_feed(match.id),
+      fn item -> %{
+        id: item.id,
+        message: generate_message(item.penalty, item.score),
+        penalty: item.penalty,
+        score_id: item.score.id,
+        created_at: item.created_at
+      }
+      end
+    )
+
     socket = assign(
       socket,
       match: match,
       scores: scores,
-      feed_messages: [],
+      feed_items: feed_items,
       selected_score: nil,
       selected_penalty: nil
     )
@@ -22,22 +34,21 @@ defmodule PegelclubExWeb.ControlPanelLive do
   end
 
   # INFO HANDLER
-  def handle_info({:score_incremented, %{:score => score, :penalty => penalty}}, socket) do
+  def handle_info({:feed_item_added, %{:id => id, :score => score, :penalty => penalty, created_at: created_at}}, socket) do
     if (score.match_id != socket.assigns.match.id), do: {:noreply, socket}
 
-    score = Repo.preload(score, :player)
-    message = "#{penalty_string(penalty)} Strafe für #{score.player.name}"
+    message = generate_message(penalty, score)
 
-    socket = update(socket, :feed_messages, fn feed_messages ->
-      [ %{id: feed_message_id(score), message: message, penalty: penalty, score_id: score.id} | feed_messages ]
+    socket = update(socket, :feed_items, fn feed_items ->
+      [ %{id: id, message: message, penalty: penalty, score_id: score.id, created_at: created_at} | feed_items ]
     end)
 
     {:noreply, socket}
   end
 
-  def handle_info({:feed_message_removed, id}, socket) do
-    socket = update(socket, :feed_messages, fn feed_messages ->
-      Enum.filter(feed_messages, fn m -> m[:id] != id end)
+  def handle_info({:feed_item_removed, id}, socket) do
+    socket = update(socket, :feed_items, fn feed_items ->
+      Enum.filter(feed_items, fn m -> m[:id] != id end)
     end)
 
     {:noreply, socket}
@@ -67,11 +78,11 @@ defmodule PegelclubExWeb.ControlPanelLive do
     end
 
   # EVENT HANDLER
-  def handle_event("decrement", %{"message-id" => message_id, "penalty" => penalty, "score-id" => score_id}, socket) do
+  def handle_event("decrement", %{"item-id" => item_id, "penalty" => penalty, "score-id" => score_id}, socket) do
     score = Game.get_score!(score_id)
     Game.decrease_penalty(score, String.to_atom(penalty))
 
-    Phoenix.PubSub.broadcast(PegelclubEx.PubSub, "match_scores_#{score.match_id}", {:feed_message_removed, message_id})
+    Game.ControlPanelServer.remove_item(score.match_id, item_id)
 
     {:noreply, socket}
   end
@@ -94,11 +105,13 @@ defmodule PegelclubExWeb.ControlPanelLive do
 
   # =========
 
-  def feed_message_id(score) do
-    Enum.join(["feed_message", score.id, DateTime.utc_now |> DateTime.to_unix], "_")
+  defp generate_message(penalty, score) do
+    score = Repo.preload(score, :player)
+
+    "#{penalty_string(penalty)} Strafe für #{score.player.name}"
   end
 
-  def penalty_string(penalty) do
+  defp penalty_string(penalty) do
     %{
       penalty_25: "0.25 €",
       penalty_50: "0.50 €",
