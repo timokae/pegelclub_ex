@@ -69,7 +69,8 @@ defmodule PegelclubEx.Game.Matches do
       |> Map.values()
       |> Enum.sum()
 
-    average = match_total / Enum.count(match.scores)
+    present_scores = Enum.filter(match.scores, fn s -> s.is_present == true end)
+    average = match_total / Enum.count(present_scores)
 
     penalty_king = score_totals
       |> Enum.max_by(fn {_id, total} -> total end)
