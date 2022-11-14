@@ -141,16 +141,21 @@
         <li
           id={item[:id]}
           class="my-2 is-flex is-justify-content-space-between is-align-items-baseline"
-          phx-click="decrement"
-          phx-value-penalty={item[:penalty]}
-          phx-value-item-id={item[:id]}
-          phx-value-score-id={item[:score_id]}
         >
           <span>
-            <span class="has-text-grey mr-4 has-text-grey-light"><%= Timex.format!(item.created_at, "{h12}:{m}:{s}") %></span>
+            <span class="has-text-grey mr-4 has-text-grey-light"><%= Timex.format!(item.created_at, "{h24}:{m}:{s}") %></span>
             <%= item[:message] %>
           </span>
-          <button class="button is-ghost p-0" style="height: unset;">Undo</button>
+          <button
+            class="button is-ghost p-0"
+            style="height: unset;"
+            phx-click="decrement"
+            phx-value-penalty={item[:penalty]}
+            phx-value-item-id={item[:id]}
+            phx-value-score-id={item[:score_id]}
+          >
+            Undo
+          </button>
         </li>
       <% end %>
     </ul>
