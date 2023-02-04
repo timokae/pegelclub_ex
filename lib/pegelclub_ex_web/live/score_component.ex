@@ -61,7 +61,7 @@ defmodule PegelclubExWeb.ScoreComponent do
           <%= if @match_stats[:score_totals][@score.id] do %>
             <%= currency_format @match_stats[:score_totals][@score.id] %>
           <% else %>
-            <%= currency_format Map.get(@match_stats, :average) %>
+            <%= currency_format(Map.get(@match_stats, :average) + PegelclubEx.Game.Scores.penalty_other(@score)) %>
           <% end %>
         </p>
         <button

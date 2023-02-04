@@ -17,7 +17,9 @@
 
   <div class="mt-6 is-size-7">
     <p class="has-text-grey">
-      <span class="has-text-grey-dark has-text-weight-bold is-size-5"><%= currency_format @match_stats.total %></span>
+      <span class="has-text-grey-dark has-text-weight-bold is-size-5">
+        <%= currency_format(@match_stats.total + @match_stats.penalties_not_present) %>
+      </span>
       <br>
       wurden ingesamt erspielt
     </p>

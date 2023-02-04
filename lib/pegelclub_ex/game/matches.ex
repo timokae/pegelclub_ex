@@ -80,13 +80,19 @@ defmodule PegelclubEx.Game.Matches do
       |> Enum.min_by(fn {_id, total} -> total end)
       |> Kernel.elem(1)
 
+    penalties_not_present =
+      Enum.filter(match.scores, fn s -> s.is_present == false end)
+      |> Enum.map(fn s ->  Scores.penalty_other(s) end)
+      |> Enum.sum
+
     %{
       pudel_king_value: pudel_king,
       total: match_total,
       score_totals: score_totals,
       average: average,
       penalty_king: penalty_king,
-      penalty_saver: penalty_saver
+      penalty_saver: penalty_saver,
+      penalties_not_present: penalties_not_present
     }
   end
 

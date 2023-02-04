@@ -29,7 +29,7 @@
         <td class="is-white-space-nowrap">
           <%= link date_format(match.played_at), to: Routes.live_path(@conn, PegelclubExWeb.MatchLive, match.id) %>
         </td>
-        <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:total] %></td>
+        <td class="has-text-right is-white-space-nowrap"><%= currency_format(@stats[match.id][:total] + @stats[match.id][:penalties_not_present]) %></td>
         <td class="has-text-right is-white-space-nowrap"><%= currency_format @stats[match.id][:average] %></td>
         <td class="has-text-right is-white-space-nowrap"><%= @stats[match.id][:pudel_king_value] %></td>
         <td class="has-text-right is-white-space-nowrap">
