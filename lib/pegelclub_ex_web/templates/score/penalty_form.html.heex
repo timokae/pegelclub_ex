@@ -19,7 +19,7 @@
     <div class="field mt-5 mt-5">
       <%= label f, "Pudel", class: "label" %>
       <div class="control is-flex">
-        <%= number_input f, :penalty_pudel, class: "input mr-5", min: 0 %>
+        <%= number_input f, :penalty_pudel, class: "input mr-5", min: 0, tabindex: 1 %>
 
         <div class="is-flex has-gap-5">
           <%= penalty_decrease_button(:penalty_pudel) %>
@@ -33,7 +33,7 @@
   <div class="field mt-5">
     <%= label f, "0.25 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_25, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_25, class: "input mr-5", min: 0, tabindex: 2 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_25) %>
@@ -46,7 +46,7 @@
   <div class="field mt-5">
     <%= label f, "0.50 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_50, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_50, class: "input mr-5", min: 0, tabindex: 3 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_50) %>
@@ -59,7 +59,7 @@
   <div class="field mt-5">
     <%= label f, "0.75 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_75, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_75, class: "input mr-5", min: 0, tabindex: 4 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_75) %>
@@ -72,7 +72,7 @@
   <div class="field mt-5">
     <%= label f, "1.00 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_100, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_100, class: "input mr-5", min: 0, tabindex: 5 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_100) %>
@@ -85,7 +85,7 @@
   <div class="field mt-5">
     <%= label f, "1.25 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_125, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_125, class: "input mr-5", min: 0, tabindex: 6 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_125) %>
@@ -98,7 +98,7 @@
   <div class="field mt-5">
     <%= label f, "1.50 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_150, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_150, class: "input mr-5", min: 0, tabindex: 7 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_150) %>
@@ -111,7 +111,7 @@
   <div class="field mt-5">
     <%= label f, "1.75 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_175, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_175, class: "input mr-5", min: 0, tabindex: 8 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_175) %>
@@ -124,7 +124,7 @@
   <div class="field mt-5">
     <%= label f, "5.00 €", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :penalty_500, class: "input mr-5", min: 0 %>
+      <%= number_input f, :penalty_500, class: "input mr-5", min: 0, tabindex: 9 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:penalty_500) %>
@@ -137,7 +137,7 @@
   <div class="field mt-5">
     <%= label f, "Verspätung (in Minuten)", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :delay, class: "input mr-5", min: 0 %>
+      <%= number_input f, :delay, class: "input mr-5", min: 0, tabindex: 10 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:delay) %>
@@ -150,7 +150,7 @@
   <div class="field mt-5">
     <%= label f, "Früher gehen (in Minuten)", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :early_leave, class: "input mr-5", min: 0 %>
+      <%= number_input f, :early_leave, class: "input mr-5", min: 0, tabindex: 11 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:early_leave) %>
@@ -163,7 +163,7 @@
   <div class="field mt-5">
     <%= label f, "Sonstiges (in Euro)", class: "label" %>
     <div class="control is-flex">
-      <%= number_input f, :other, class: "input mr-5", min: 0 %>
+      <%= number_input f, :other, class: "input mr-5", min: 0, tabindex: 12 %>
 
       <div class="is-flex has-gap-5">
         <%= penalty_decrease_button(:other) %>
