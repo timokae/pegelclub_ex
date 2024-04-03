@@ -9,7 +9,6 @@ defmodule PegelclubExWeb.MatchView do
         "🟢"
       end
     else
-      "sadasd"
       "🔴"
     end
   end

@@ -7,7 +7,7 @@
 </section>
 
 <section class="content-container pt-6">
-  <.form let={f} for={@changeset} action={Routes.match_score_path(@conn, :create, @match)}>
+  <.form :let={f} for={@changeset} action={Routes.match_score_path(@conn, :create, @match)}>
 
     <%= hidden_input f, :match_id %>
 

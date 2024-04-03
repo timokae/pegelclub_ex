@@ -11,11 +11,12 @@ defmodule PegelclubExWeb.ScoreComponent do
     <div class={"score-box box is-flex is-flex-direction-column my-0 #{if @score.has_payed, do: "has-payed"}"}>
       <header class="is-flex is-flex-direction-row is-justify-content-space-between">
         <div class="is-flex is-flex-direction-row is-align-items-center">
-          <%= live_patch(
-            @score.player.name,
-            to: Routes.match_score_path(@socket, :edit, 7, @score),
-            class: "has-text-grey-dark has-text-weight-bold mr-2"
-          ) %>
+          <.link
+            patch={Routes.match_score_path(@socket, :edit, 7, @score)}
+            class="has-text-grey-dark has-text-weight-bold mr-2"
+          >
+            <%= @score.player.name %>
+          </.link>
 
           <%= if @score.has_payed do %>
             <span class="icon">
@@ -42,16 +43,16 @@ defmodule PegelclubExWeb.ScoreComponent do
           <% end %>
         </div>
 
-        <%= live_patch(
-          to: Routes.match_score_path(@socket, :edit, 7, @score),
-          class: "has-text-grey-dark has-text-weight-bold"
-        ) do %>
-          <button class="button is-ghost">
-            <span class="icon">
-              <i class="ri-edit-2-fill ri-lg"></i>
-            </span>
-          </button>
-        <% end %>
+        <.link
+          patch={Routes.match_score_path(@socket, :edit, 7, @score)}
+          class="has-text-grey-dark has-text-weight-bold"
+        >
+        <button class="button is-ghost">
+          <span class="icon">
+            <i class="ri-edit-2-fill ri-lg"></i>
+          </span>
+        </button>
+        </.link>
       </header>
 
       <p class="is-size-7 has-text-grey"><%= player_status(@score) %></p>
@@ -169,16 +170,16 @@ defmodule PegelclubExWeb.ScoreComponent do
     end
   end
 
-  defp player_symbol(score, pudel_king_value) do
-    if score.penalty_pudel == pudel_king_value do
-      ""
-    else
-      "ri-user-3-fill ri-lg"
-    end
-  end
+  # defp player_symbol(score, pudel_king_value) do
+  #   if score.penalty_pudel == pudel_king_value do
+  #     ""
+  #   else
+  #     "ri-user-3-fill ri-lg"
+  #   end
+  # end
 
-  defp initials(player) do
-    player.name
-    |> String.at(0)
-  end
+  # defp initials(player) do
+  #   player.name
+  #   |> String.at(0)
+  # end
 end
