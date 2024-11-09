@@ -9,6 +9,24 @@
 
   <hr/>
 
+  <div class="is-flex mb-5">
+    <p
+      class="has-text-danger"
+      id="disconnected-indicator"
+      phx-connected={JS.hide(to: "#disconnected-indicator")}
+      phx-disconnected={JS.show(to: "#disconnected-indicator")}
+    >Trying to connect...</p>
+
+    <p
+      class="has-text-success"
+      id="connection-indicator"
+      phx-connected={JS.show(to: "#connection-indicator")}
+      phx-disconnected={JS.hide(to: "#connection-indicator")}
+    >Connected</p>
+  </div>
+
+
+
   <div id="selector-wrapper" data-match-id={@match.id}>
     <div class="columns is-multiline is-mobile name-selector mb-0 px-1">
       <%= for score <- @scores do %>
